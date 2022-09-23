@@ -1,5 +1,5 @@
 @php
-$title = 'Group';
+$title = 'Projects-Group';
 @endphp
 
 @extends('layouts.app')

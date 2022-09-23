@@ -61,12 +61,13 @@
                       <li class="nav-item"><a class="nav-link" href="{{Route('admin.clients')}}"> clients </a></li>
                       <li class="nav-item"><a class="nav-link" href="{{Route('admin.contact')}}"> contact </a></li>
                       <li class="nav-item"><a class="nav-link" href="{{Route('admin.copyright')}}"> copyright </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.general')}}"> Social </a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.general')}}"> social </a></li>
                       <li class="nav-item"><a class="nav-link" href="{{Route('admin.about')}}"> about </a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.group_services')}}"> services Group </a></li>
                       <li class="nav-item"><a class="nav-link" href="{{Route('admin.services')}}"> services </a></li>
                       <li class="nav-item"><a class="nav-link" href="{{Route('admin.View_data')}}"> view data </a></li>
                       <li class="nav-item"><a class="nav-link" href="{{Route('admin.View_control_page')}}"> control pages </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.reg')}}"> register </a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.View_our_team')}}"> our team </a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -93,10 +94,13 @@
                               <a class="dropdown-item" href="{{ URL('Admin/update_user/user=' . Auth::user()->id) }}">
                                 {{ __('Profile') }}
                               </a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
+                              <a class="dropdown-item" href="{{ route('admin.reg') }}">
+                                {{ __('New User') }}
+                              </a>
+                              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                   document.getElementById('logout-form').submit();">
+                                  {{ __('Logout') }}
+                              </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf

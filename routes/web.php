@@ -61,42 +61,50 @@ Route::group(['prefix' => 'Admin' , 'namespace' => 'Admin'] ,function()
             Route::post('/save_all_search', [App\Http\Controllers\Admin\AdminController::class,'save_all_search']) ->name('admin.all.search.project');
 
 
-    Route::get('/ViewDetails'  , [App\Http\Controllers\Admin\AdminController::class, 'details'])   ->name('admin.details');
-            Route::post('/save_details_project', [App\Http\Controllers\Admin\AdminController::class,'save_details_project']) ->name('admin.save.details.project');
-            Route::post('/search_all_section', [App\Http\Controllers\Admin\AdminController::class,'search_all_section']) ->name('admin.search.all.section');
-            Route::post('/delete_section', [App\Http\Controllers\Admin\AdminController::class,'delete_section']) ->name('admin.del.section');
-            Route::post('/get_data_details', [App\Http\Controllers\Admin\AdminController::class,'get_data_details']) ->name('admin.get.update.details');
-            Route::post('/del_image_details', [App\Http\Controllers\Admin\AdminController::class,'del_image_details']) ->name('admin.del.image.details');
-            Route::post('/update_image_details', [App\Http\Controllers\Admin\AdminController::class,'update_image_details']) ->name('admin.update.image.details');
+    Route::get('/ViewDetails'  , [AdminController::class, 'details'])   ->name('admin.details');
+            Route::post('/save_details_project', [AdminController::class,'save_details_project']) ->name('admin.save.details.project');
+            Route::post('/search_all_section', [AdminController::class,'search_all_section']) ->name('admin.search.all.section');
+            Route::post('/delete_section', [AdminController::class,'delete_section']) ->name('admin.del.section');
+            Route::post('/get_data_details', [AdminController::class,'get_data_details']) ->name('admin.get.update.details');
+            Route::post('/del_image_details', [AdminController::class,'del_image_details']) ->name('admin.del.image.details');
+            Route::post('/update_image_details', [AdminController::class,'update_image_details']) ->name('admin.update.image.details');
 
 
 
 
-    Route::get('/Contact'  , [App\Http\Controllers\Admin\AdminController::class, 'contact'])   ->name('admin.contact');
-            Route::post('/delete_contact', [App\Http\Controllers\Admin\AdminController::class,'delete_contact']) ->name('admin.delete.contact');
+    Route::get('/Contact'  , [AdminController::class, 'contact'])   ->name('admin.contact');
+            Route::post('/delete_contact', [AdminController::class,'delete_contact']) ->name('admin.delete.contact');
 
-    Route::get('/Register' , [App\Http\Controllers\Admin\AdminController::class, 'reg'])   ->name('admin.reg');
+    Route::get('/Register' , [AdminController::class, 'reg'])   ->name('admin.reg');
 
 
-    Route::get('/View_services'    , [App\Http\Controllers\Admin\AdminController::class, 'services'])     ->name('admin.services');
-        Route::post('/delete_service', [App\Http\Controllers\Admin\AdminController::class,'delete_service']) ->name('admin.delete.service');
-        Route::post('/save_service', [App\Http\Controllers\Admin\AdminController::class,'save_service']) ->name('admin.save.service');
-        Route::post('/update_service', [App\Http\Controllers\Admin\AdminController::class,'update_service']) ->name('admin.update.services');
-        Route::post('/get_update_service', [App\Http\Controllers\Admin\AdminController::class,'get_update_service']) ->name('admin.get.update.services');
+    Route::get('/View_services'    , [AdminController::class, 'services'])     ->name('admin.services');
+        Route::post('/delete_service', [AdminController::class,'delete_service']) ->name('admin.delete.service');
+        Route::post('/save_service', [AdminController::class,'save_service']) ->name('admin.save.service');
+        Route::post('/update_service', [AdminController::class,'update_service']) ->name('admin.update.services');
+        Route::post('/get_update_service', [AdminController::class,'get_update_service']) ->name('admin.get.update.services');
 
-    Route::get('/ViewData',[App\Http\Controllers\Admin\AdminController::class,'View_data']) ->name('admin.View_data');
-        Route::post('/save_datasheet', [App\Http\Controllers\Admin\AdminController::class,'save_datasheet']) ->name('admin.save_datasheet');
-        Route::post('/search_counter', [App\Http\Controllers\Admin\AdminController::class,'search_counter']) ->name('admin.search.vis');
+    Route::get('/ViewData',[AdminController::class,'View_data']) ->name('admin.View_data');
+        Route::post('/save_datasheet', [AdminController::class,'save_datasheet']) ->name('admin.save_datasheet');
+        Route::post('/search_counter', [AdminController::class,'search_counter']) ->name('admin.search.vis');
 
-    Route::get('/View_SortProjects',[App\Http\Controllers\Admin\AdminController::class,'View_sort_projects']) ->name('admin.View_sort_projects');
-        Route::post('/save_sort_project', [App\Http\Controllers\Admin\AdminController::class,'save_sort_project']) ->name('admin.save_sort_project');
+    Route::get('/View_SortProjects',[AdminController::class,'View_sort_projects']) ->name('admin.View_sort_projects');
+        Route::post('/save_sort_project', [AdminController::class,'save_sort_project']) ->name('admin.save_sort_project');
 
     Route::get('/View_control_page',[AdminController::class,'View_control_page'])->name('admin.View_control_page');
-        Route::post('/save_control_page', [App\Http\Controllers\Admin\AdminController::class,'save_control_page']) ->name('admin.save_control_page');
-
+        Route::post('/save_control_page', [AdminController::class,'save_control_page']) ->name('admin.save_control_page');
 
     Route::get('/update_user/user={id}',[AdminController::class,'update_user'])->name('update_user');
     Route::post('/update_user_now',[AdminController::class,'update_user_now'])->name('update_user_now');
+
+    Route::get('/Services_group'    , [AdminController::class, 'services_group'])   ->name('admin.group_services');
+      Route::post('/save_services_group', [AdminController::class,'save_services_group']) ->name('admin.save_services_group');
+
+    Route::get('/View_our_team'      , [AdminController::class, 'view_our_team'])   ->name('admin.View_our_team');
+        Route::post('/delete_person' , [AdminController::class,'delete_person'])    ->name('admin.delete.person');
+        Route::post('/save_person'   , [AdminController::class,'save_person'])      ->name('admin.save.person');
+        Route::post('/update_person' , [AdminController::class,'update_person']) ->name('admin.update.person');
+        Route::post('/get_update_person', [AdminController::class,'get_update_person']) ->name('admin.get.update.person');
 
 });
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Control_Page;
+use App\Models\OurTeam;
+use App\Models\ServicesGroup;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Group;
@@ -64,6 +66,12 @@ class AdminController extends Controller
         }
         return view('admin.group',compact('groups','counter'));
     }
+
+    public function view_our_team(){
+      $team = OurTeam::get()->all();
+      return view('admin.our_team',compact('team'));
+    }
+
     public function project(){
         $groups = Group::get()->all();
         if(!empty($groups)){
@@ -97,6 +105,11 @@ class AdminController extends Controller
       $projects = Project::select(['id','title','image'])->orderBy("sort_project")->get();
 
       return view('admin.sort_projects',compact('projects'));
+    }
+
+    public function services_group(){
+      $groups = ServicesGroup::get()->all();
+      return view('admin.services_group',compact('groups',));
     }
 
     function ReturnSucsess($status , $msg){
@@ -151,7 +164,31 @@ class AdminController extends Controller
         }
     }
 
-    #################### CopyRight Page ###########################
+    #################### Group Page ###########################
+    public function save_services_group(Request $request){
+      switch($request->action){
+        case 'save':{
+          $save = ServicesGroup::create([
+            'group'=>$request->groupName,
+          ]);
+          if($save){return $this->ReturnSucsess('true', $save->id);}
+        }break;
+        case 'update':{
+          $save = ServicesGroup::where(['id'=>$request->groupId])->update([
+            'group'=>$request->groupName,
+          ]);
+          if($save){return $this->ReturnSucsess('true', 'Updated Ggroup');}
+        }break;
+        case 'del':{
+          $save = ServicesGroup::where(['id'=>$request->groupId])->delete();
+          if($save){return $this->ReturnSucsess('true', 'Delete Ggroup');}
+        }
+          break;
+      }
+    }
+
+
+  #################### CopyRight Page ###########################
     public function save_copy(Request $request){
         $del = CopyRight::truncate();
         $save = CopyRight::create([
@@ -556,4 +593,61 @@ class AdminController extends Controller
         return abort(404,'This is password not equal confirmation');
       }
     }
+
+  ########################## Save Person ###################
+  public function save_person(Request $request){
+    $file = new Filesystem;
+    $file = $this->saveimage($request->image, 'Admin/Team');
+    $save = OurTeam::create([
+      'image' => $file,
+      'name'  =>$request->name,
+      'note'  =>$request->disc,
+      'email'  =>$request->email,
+    ]);
+    if($save){return $this->ReturnSucsess('true', $save->id);}
+  }
+
+  ###################### Delete Person ###############################
+  public function delete_person(Request $request){
+    $service = OurTeam::where(['id'=>$request->service])->first();
+    $image_path = 'Admin/Team/'. $service->image;
+    if(File::exists($image_path)){
+      File::delete($image_path);
+      $delclient = OurTeam::where(['id'=>$request->service])->delete();
+      if($delclient){return $this->ReturnSucsess('true', 'Deleted Person');}
+    }
+  }
+
+  ###################### get_update_Person #####################
+  public function get_update_person(Request $request){
+    $service = OurTeam::limit(1)->where(['id'=>$request->id])->first();
+    if($service){return $this->ReturnSucsess('true', $service);}
+  }
+
+  ###################### update_Persone ##################
+  public function update_person(Request $request){
+    $service = OurTeam::limit(1)->where(['id'=>$request->service_id])->first();
+    if($request->image == null){
+      $update = OurTeam::limit(1)->where(['id'=>$request->service_id])->update([
+        'name'  => $request->name,
+        'note'  => $request->disc,
+        'email' => $request->email,
+      ]);
+      if($update){return $this->ReturnSucsess('true', 'Updated Service');}
+    }else{
+      $image_path = 'Admin/Team/'. $service->image;
+      if(File::exists($image_path)){
+        File::delete($image_path);
+      }
+      $file = new Filesystem;
+      $file = $this->saveimage($request->image, 'Admin/Team');
+      $update = OurTeam::limit(1)->where(['id'=>$request->service_id])->update([
+        'name'  => $request->name,
+        'note'  => $request->disc,
+        'email' => $request->email,
+        'image' =>$file
+      ]);
+      if($update){return $this->ReturnSucsess('true', 'Updated Person');}
+    }
+  }
 }

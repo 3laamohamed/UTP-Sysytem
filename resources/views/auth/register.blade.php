@@ -12,7 +12,7 @@
               @if(isset($user_update))
                 <div class="card-header">{{ __('Update User') }}</div>
               @else
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('New User') }}</div>
               @endif
 
                 <div class="card-body">
@@ -79,13 +79,13 @@
                           @if(isset($user_update))
                             <div class="col-md-6 offset-md-4">
                               <button id="update_user" type="submit" class="btn btn-primary">
-                                {{ __('Update') }}
+                                {{ __('Update User') }}
                               </button>
                             </div>
                           @else
                             <div class="col-md-6 offset-md-4">
                               <button type="submit" class="btn btn-primary">
-                                {{ __('Register') }}
+                                {{ __('Save User') }}
                               </button>
                             </div>
                           @endif

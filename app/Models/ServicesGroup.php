@@ -5,13 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Services extends Model
+class ServicesGroup extends Model
 {
     use HasFactory;
-    protected $table ='services';
+    protected $table ='services_groups';
     protected $guarded = [];
-    public function Group()
-    {
-      return $this->belongsTo('App\Models\ServicesGroup','group_id','id');
-    }
 }
