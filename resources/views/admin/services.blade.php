@@ -23,6 +23,12 @@
           </div>
         </div>
         <div class="col-md-6">
+          <label for="group" class="form-label">Select Group</label>
+          <select class="form-select" id='group' name="group" required>
+            @foreach($groups as $group)
+              <option value="{{$group->id}}">{{$group->group}}</option>
+            @endforeach
+          </select>
           <!-- Upload Image -->
           <div class='text-center'>
             <i class="file-image">
@@ -70,5 +76,18 @@
 </div>
 <script>
 let rowId,_token=$("input[name=\"_token\"]").val();$("#save_service").on("click",function(){let a=new FormData($("#form_save_service")[0]),b=$("tbody").html();$.ajax({url:"{{route('admin.save.service')}}",method:"post",enctype:"multipart/form-data",processData:!1,cache:!1,contentType:!1,data:a,success:function(a){"true"==a.status&&(b+=`<tr id="${a.msg}"><td>${a.msg}</td><td>${$("#service_name").val()}</td><td><button class="table-buttons" onclick="getRow(${a.msg})"><ion-icon class="text-primary" name="create-outline"></ion-icon></button><button class="table-buttons" id='delete_service'><ion-icon class="text-danger" name="trash-outline"></ion-icon></button></td></tr>`,$("tbody").html(b),document.getElementById("form_save_service").reset(),$(".reset").click(),Swal.fire({position:"center",icon:"success",title:"Saved Service",showConfirmButton:!1,timer:1500}))}})}),$("body").on("click","#delete_service",function(){let a=$("input[name=\"_token\"]").val(),b=$(this).parents("tr").attr("id");Swal.fire({title:"Are you sure?",text:"You won't delete this service",icon:"warning",showCancelButton:!0,confirmButtonColor:"#3085d6",cancelButtonColor:"e#d33",confirmButtonText:"Yes, dlete it!"}).then(c=>{c.isConfirmed&&$.ajax({url:"{{route('admin.delete.service')}}",method:"post",enctype:"multipart/form-data",data:{_token:a,service:b},success:function(a){$(`tr#${b}`).remove(),Swal.fire({position:"center",icon:"success",title:a.msg,showConfirmButton:!1,timer:1500})}})})}),$("#update_service").on("click",function(a){a.preventDefault();let b=new FormData($("#form_save_service")[0]);$.ajax({url:"{{route('admin.update.services')}}",method:"post",enctype:"multipart/form-data",processData:!1,cache:!1,contentType:!1,data:b,success:function(a){"true"===a.status&&($(`tr#${rowId}`).find("td:nth-child(2)").text($("#service_name").val()),$("#save_service").removeClass("d-none"),$("#update_service").addClass("d-none"),document.getElementById("form_save_service").reset(),$(".reset").click(),Swal.fire({position:"center",icon:"success",title:a.msg,showConfirmButton:!1,timer:1500}))}})});function getRow(a){$.ajax({url:"{{route('admin.get.update.services')}}",method:"post",enctype:"multipart/form-data",data:{_token,id:a},success:function(b){"true"===b.status&&(rowId=a,$("#save_service").addClass("d-none"),$("#update_service").removeClass("d-none"),$("#service_id").val(rowId),$("#service_name").val(b.msg.title),$("#discription").val(b.msg.disc),$("#image").attr("title",b.msg.image),$("#item-image").html(`<label for="image" class="image unvisibile" data-label="Add Image" style="background-image:url({{ URL::asset('Admin/Services') }}/${b.msg.image})"></label>`),window.scrollTo({top:0,behavior:"smooth"}))}})}
+$("#group").on("change",function(){
+  let a=$("#group").val();
+  $.ajax({
+    url:"{{route('admin.all.search.services')}}",
+    method:"post"
+    ,enctype:"multipart/form-data",
+    data:{_token,group:a},
+    success:function(a){
+      if("true"==a.status){
+        let c="";
+        for(var b=0;b<a.msg.length;b++)c+=`<tr id="${a.msg[b].id}"><td>${a.msg[b].id}</td><td>${a.msg[b].title}</td><td><button class="table-buttons" onclick="getRow(${a.msg[b].id})"><ion-icon class="text-primary" name="create-outline"></ion-icon></button><button class="table-buttons" id='delete_project'><ion-icon class="text-danger" name="trash-outline"></ion-icon></button></td></tr>`;
+        $("tbody").html(c)
+      }}})})
 </script>
 @stop

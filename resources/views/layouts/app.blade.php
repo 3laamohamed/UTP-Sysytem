@@ -56,8 +56,8 @@
                     <ul class="navbar-nav me-auto">
                       <li class="nav-item"><a class="nav-link" href="{{Route('admin.View_sort_projects')}}"> sort projects </a></li>
                       <li class="nav-item"><a class="nav-link" href="{{Route('admin.project')}}"> projects </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.details')}}"> details </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.group')}}"> group </a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.details')}}"> project details </a></li>
+                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.group')}}"> projects group </a></li>
                       <li class="nav-item"><a class="nav-link" href="{{Route('admin.clients')}}"> clients </a></li>
                       <li class="nav-item"><a class="nav-link" href="{{Route('admin.contact')}}"> contact </a></li>
                       <li class="nav-item"><a class="nav-link" href="{{Route('admin.copyright')}}"> copyright </a></li>

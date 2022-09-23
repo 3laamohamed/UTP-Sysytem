@@ -80,7 +80,6 @@ class AdminController extends Controller
             $projects =[];
         }
         return view('admin.project',compact('groups','projects'));
-
     }
     public function details(){
         $projects = Project::select(['id','title'])->get()->all();
@@ -97,8 +96,13 @@ class AdminController extends Controller
     }
 
     public function services(){
-        $services = Services::orderBy('id', 'DESC')->get()->all();
-        return view('admin.services',compact('services'));
+      $groups = ServicesGroup::get()->all();
+      if(!empty($groups)){
+        $services = Services::where('group_id',$groups[0]->id)->select(['id','title'])->get();
+      }else{
+        $services =[];
+      }
+      return view('admin.services',compact('groups','services'));
     }
     public function View_sort_projects(){
 
@@ -445,9 +449,10 @@ class AdminController extends Controller
         $file = new Filesystem;
         $file = $this->saveimage($request->image, 'Admin/Services');
         $save = Services::create([
-            'image' => $file,
-            'title'  =>$request->name,
-            'disc'  =>$request->disc,
+            'image'    => $file,
+            'title'    =>$request->name,
+            'disc'     =>$request->disc,
+            'group_id' =>$request->group,
         ]);
         if($save){return $this->ReturnSucsess('true', $save->id);}
     }
@@ -467,8 +472,9 @@ class AdminController extends Controller
         $service = Services::limit(1)->where(['id'=>$request->service_id])->first();
         if($request->image == null){
             $update = Services::limit(1)->where(['id'=>$request->service_id])->update([
-                'title' => $request->name,
-                'disc' => $request->disc,
+                'title'    => $request->name,
+                'disc'     => $request->disc,
+                'group_id' =>$request->group,
             ]);
             if($update){return $this->ReturnSucsess('true', 'Updated Service');}
         }else{
@@ -479,9 +485,10 @@ class AdminController extends Controller
             $file = new Filesystem;
             $file = $this->saveimage($request->image, 'Admin/Services');
             $update = Services::limit(1)->where(['id'=>$request->service_id])->update([
-                'title' => $request->name,
-                'disc' => $request->disc,
-                'image' =>$file
+                'title'    => $request->name,
+                'disc'     => $request->disc,
+                'group_id' => $request->group,
+                'image'    => $file
             ]);
             if($update){return $this->ReturnSucsess('true', 'Updated Service');}
         }
@@ -649,5 +656,10 @@ class AdminController extends Controller
       ]);
       if($update){return $this->ReturnSucsess('true', 'Updated Person');}
     }
+  }
+
+  public function group_search_services(Request $request){
+    $projects = Services::where('group_id',$request->group)->select(['id','title'])->get();
+    return $this->ReturnSucsess('true', $projects);
   }
 }
