@@ -62,15 +62,17 @@
       $("#sortable").disableSelection();
       $('#save_sort').on('click', function() {
         let sortArr = []
+        let group = $('#project').val()
         $('#sortable li').each(function () {
             sortArr.push($(this).attr('data-id'));
         });
         $.ajax({
-          url: "{{route('admin.save_sort_project')}}",
+          url: "{{route('admin.save_sort_services')}}",
           method: "post",
           data: {
             _token,
-            projects:sortArr
+            projects:sortArr,
+            group,
           },
           success: function(data) {
             if(data.status == 'true'){

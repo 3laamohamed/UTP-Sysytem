@@ -46,4 +46,15 @@ $(document).ready(function () {
 		},
 	});
 	// ==================== End Client Slider =====================
+  // ==================== Start Project Description =====================
+  $('.show-project').on('click', function () {
+    let projectText = $(this).siblings('.project-text');
+    projectText.toggleClass('show');
+    if (projectText.hasClass('show')) {
+      $(this).text('Show Less');
+    } else {
+      $(this).text('Show More');
+    }
+  });
+  // ==================== End Project Description =====================
 });

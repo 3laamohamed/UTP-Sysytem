@@ -127,6 +127,9 @@ Route::group(['prefix' => 'Admin' , 'namespace' => 'Admin'] ,function()
 
 Route::get('/About',[MainController::class,'about'])->name('about');
 Route::get('/Contact',[MainController::class,'contact'])->name('contact');
+Route::get('/projects',[MainController::class,'projects'])->name('projects');
+Route::get('/AllServices',[MainController::class,'allServices'])->name('allServices');
+Route::get('/Services/Group={id}',[MainController::class,'show_services'])->name('show_services');
 
 
 

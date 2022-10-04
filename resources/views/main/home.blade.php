@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+
   <!-- Start Header -->
   <header class="check-scroll" id='Home'>
     <div class="container">
@@ -44,7 +45,6 @@
     <div class="shapes circle-shape last"></div>
   </section>
   <!-- End About -->
-
   <!-- Start Services -->
   <section class="services py-5 position-relative">
     <div class="container">
@@ -59,7 +59,7 @@
             <h3 class="service-title">{{$group->group}}</h3>
             <p>{{$group->disc}}</p>
             <a href="#" class="box-footer">
-              <span>Read More</span>
+              <a href="{{URL('/Services/Group='.$group->id)}}">Read More</a>
               <i class="fa-solid fa-arrow-right-long"></i>
             </a>
           </div>
@@ -69,7 +69,6 @@
     </div>
   </section>
   <!-- End Services -->
-
   <!-- Start Partner -->
   <section class="partner py-5 position-relative">
     <div class="container">
@@ -100,12 +99,12 @@
             @foreach($faqs as $faq)
             <div class="accordion-item">
               <h2 class="accordion-header" id="faq_headOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq_one"
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q{{$faq->id}}"
                         aria-expanded="false" aria-controls="faq_one">
                  {{$faq->question}}
                 </button>
               </h2>
-              <div id="faq_one" class="accordion-collapse collapse show" aria-labelledby="faq_headOne">
+              <div id="q{{$faq->id}}" class="accordion-collapse collapse" aria-labelledby="faq_headOne">
                 <div class="accordion-body">
                   {{$faq->answer}}
                 </div>

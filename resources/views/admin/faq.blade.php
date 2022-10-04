@@ -36,7 +36,7 @@
                 <button class="table-buttons" onclick="getRow({{$faq->id}})">
                   <ion-icon class="text-primary" name="create-outline"></ion-icon>
                 </button>
-                <button class="table-buttons" id='delete_client'>
+                <button class="table-buttons" id='delete_faq'>
                   <ion-icon class="text-danger" name="trash-outline"></ion-icon>
                 </button>
               </td>
@@ -76,7 +76,7 @@ $("body").on("click", "#save_faq", function () {
           <td>${answer}</td>
           <td>
             <button class="table-buttons" onclick="getRow(${c.msg})"><ion-icon class="text-primary" name="create-outline"></ion-icon></button>
-            <button class="table-buttons" id='delete_group'><ion-icon class="text-danger" name="trash-outline"></ion-icon></button>
+            <button class="table-buttons" id='delete_faq'><ion-icon class="text-danger" name="trash-outline"></ion-icon></button>
           </td>
         </tr>`),
         $("tbody").html(b),
@@ -91,7 +91,7 @@ $("body").on("click", "#update_faq", function () {
   let answer = $("#answer").val();
   action = "update"
   $.ajax({
-    url: "{{route('admin.save_faq')}}",
+    url: "{{route('admin.update_faq')}}",
     method: "post",
     enctype: "multipart/form-data",
     data: { _token, questionId: question.attr("row"), question: question.val(),answer, action },
@@ -100,21 +100,22 @@ $("body").on("click", "#update_faq", function () {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: b.msg,
+          title: "Update Question",
           showConfirmButton: !1,
           timer: 1500,
         }),
         $(`tr#${question.attr("row")}`)
           .find("td:nth-child(2)")
-          .text(question.val()),
+          .text(question.val());
+        $(`tr#${question.attr("row")}`)
           .find("td:nth-child(3)")
-          .text(answer),
-        mood = "create",
+          .text(answer);
+        mood = "create";
         $("#update_faq")
           .html("create" === mood ? "Save" : "Update")
           .removeClass("btn-primary")
           .addClass("btn-success")
-          .attr("id", "save_faq"),
+          .attr("id", "save_faq");
           question.val("");
           $("#answer").val("");
       }

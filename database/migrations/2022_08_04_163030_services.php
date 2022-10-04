@@ -19,6 +19,7 @@ class Services extends Migration
             $table->string('image')->nullable();
             $table->text('disc')->nullable();
             $table->text('group_id')->nullable();
+            $table->integer('sort_service')->nullable();
             $table->timestamps();
         });
     }

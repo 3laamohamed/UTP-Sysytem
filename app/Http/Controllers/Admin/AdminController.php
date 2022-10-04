@@ -155,8 +155,12 @@ class AdminController extends Controller
     }
 
     public function services(){
-      $services = Services::orderBy('id', 'DESC')->get()->all();
       $groups = ServicesGroup::get()->all();
+      if(!empty($groups)){
+        $services = Services::where(['group_id'=>$groups[0]->id])->orderBy('id', 'DESC')->get()->all();
+      }else{
+        $services = [];
+      }
       $user = Auth::user();
       if($user->can('services')){
         return view('admin.services',compact('services','groups'));
@@ -200,7 +204,7 @@ class AdminController extends Controller
   }
 
   public function save_get_sort_services(Request $request){
-    $services = Services::where(['group_id'=>$request->id])->get();
+    $services = Services::where(['group_id'=>$request->id])->orderBy("sort_service")->get();
     return response()->json([
       'status'=>'true',
       'services'=>$services
@@ -209,7 +213,6 @@ class AdminController extends Controller
 
     public function services_group(){
       $groups = ServicesGroup::get()->all();
-
       $user = Auth::user();
       if($user->can('group_services')){
         return view('admin.services_group',compact('groups',));
@@ -575,6 +578,7 @@ class AdminController extends Controller
     }
     ########################## Save Service ###################
     public function save_service(Request $request){
+      $last_sort = Services::where(['group_id'=>$request->group])->max('sort_service') + 1;
         $file = new Filesystem;
         $file = $this->saveimage($request->image, 'Admin/Services');
         $save = Services::create([
@@ -582,6 +586,7 @@ class AdminController extends Controller
             'title'    =>$request->name,
             'disc'     =>$request->disc,
             'group_id' =>$request->group,
+            'sort_service' =>$last_sort,
         ]);
         if($save){return $this->ReturnSucsess('true', $save->id);}
     }
@@ -705,6 +710,19 @@ class AdminController extends Controller
     if($update_project){return $this->ReturnSucsess('true', 'Saved Sort');}
   }
 
+
+  #################### save_sort_services ##########################
+  public function save_sort_services(Request $request){
+    $counter = 1;
+    foreach ($request->projects as $project){
+      $update_project = Services::where(['group_id'=>$request->group,'id'=>$project])->update([
+        'sort_service'=>$counter,
+      ]);
+      $counter++;
+    }
+    if($update_project){return $this->ReturnSucsess('true', 'Saved Sort');}
+  }
+
     public function save_control_page(Request $request){
       foreach ($request->pages as $page){
           $save = Control_Page::where(['page'=>$page['name']])->update([
@@ -803,7 +821,6 @@ class AdminController extends Controller
     $projects = Services::where('group_id',$request->group)->select(['id','title'])->get();
     return $this->ReturnSucsess('true', $projects);
   }
-
   ########################## Save Client ######################
   public function save_partners(Request $request){
     if($request->client != null){
@@ -833,12 +850,12 @@ class AdminController extends Controller
       'question'=>$request->question,
       'answer'=>$request->answer,
     ]);
-    if($saveFaq){return $this->ReturnSucsess('true', 'Save Question');}
+    if($saveFaq){return $this->ReturnSucsess('true', $saveFaq->id);}
   }
 
   #################### Update FAQ ###############################3
   public function update_faq (Request $request){
-    $saveFaq = FAQ::limit(1)->where(['id'=>$request->id])->update([
+    $saveFaq = FAQ::limit(1)->where(['id'=>$request->questionId])->update([
       'question'=>$request->question,
       'answer'=>$request->answer,
     ]);
@@ -847,7 +864,7 @@ class AdminController extends Controller
 
   #################### Delete FAQ ###############################3
   public function delete_faq (Request $request){
-    $saveFaq = FAQ::limit(1)->where(['id'=>$request->id])->delete();
+    $saveFaq = FAQ::limit(1)->where(['id'=>$request->questionId])->delete();
     if($saveFaq){return $this->ReturnSucsess('true', 'Delete Question');}
   }
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Main;
+use App\Models\Control_Page;
 use App\Models\FAQ;
 use App\Models\Group;
 use App\Models\CopyRight;
@@ -52,24 +53,17 @@ class MainController extends Controller
          $partners = Partner::get()->all();
          $clients  = Client::inRandomOrder()->get()->all();
          $social   = Social::get()->first();
+         $pages = Control_Page::get()->all();
 
-
-//        $services = Services::get()->all();
-//        $groups   = Group::get()->all();
-//        $copyright= CopyRight::get()->first();
-//        $projects = Project::orderBy("sort_project")->get();
-        return view('main.home',compact([
+      return view('main.home',compact([
             'about',
             'servicesGroups',
             'faqs',
             'partners',
-//            'services',
-//            'groups',
-              'clients',
-//            'copyright',
-              'social',
-//            'projects',
-              'get_data',
+            'clients',
+            'social',
+            'get_data',
+            'pages'
         ]));
     }
 
@@ -98,42 +92,19 @@ class MainController extends Controller
       return response()->json(['status'=>'true']);
     }
   }
-
-    public function get_sections(Request $request){
-        $sections = Section::where(['project_id'=>$request->id])->get();
-        if($sections){
-            return response()->json([
-                'status'=>'true',
-                'sections'=>$sections
-            ]);
-        }
-    }
-
-    public function get_details(Request $request){
-        if($request->id == 'all'){
-            $sections = Section::where(['project_id'=>$request->pro])->select(['id'])->get();
-            $details = Details::whereIn('section_id',$sections)->get();
-        }else{
-            $details = Details::where(['section_id'=>$request->id])->get();
-        }
-        if($details){
-            return response()->json([
-                'status'=>'true',
-                'details'=>$details
-            ]);
-        }
-    }
-
     public function about(){
+      $pages = Control_Page::get()->all();
       $about    = About::get()->first();
       $team    = OurTeam::get()->all();
       return view('main.about',compact([
         'about',
         'team',
+        'pages'
       ]));
     }
 
   public function contact(){
+    $pages = Control_Page::get()->all();
     $about    = About::get()->first();
     $team     = OurTeam::get()->all();
     $social   = Social::get()->first();
@@ -142,6 +113,35 @@ class MainController extends Controller
       'about',
       'team',
       'social',
+      'pages'
     ]));
   }
+
+  public function projects(){
+    $pages = Control_Page::get()->all();
+    $about    = About::get()->first();
+    $projects = Project::orderBy("sort_project")->get();
+    return view('main.project',compact([
+      'about',
+      'projects',
+      'pages'
+    ]));
+  }
+
+  public function show_services($id){
+     $pages = Control_Page::get()->all();
+     $group = ServicesGroup::limit(1)->where(['id'=>$id])->select(['group'])->first();
+     $services = Services::where(['group_id'=>$id])->orderBy("sort_service")->get();
+     return view('main.services',compact('group','services','pages'));
+  }
+
+  public function allServices(){
+    $pages = Control_Page::get()->all();
+    $groups = ServicesGroup::with(['Services'=>function($query){
+      $query->orderBy('group_id')->orderBy('sort_service');
+    }])->orderBy("sort_project")->get();
+    return view('main.allservices',compact('groups','pages'));
+  }
+
+
 }
