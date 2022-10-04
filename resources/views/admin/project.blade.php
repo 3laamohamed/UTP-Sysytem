@@ -16,15 +16,7 @@
                 <label for="project_name" class="form-label">Project Name</label>
                 <input type="text" class="form-control" name="label" id="project_name" placeholder="Please Enter Project Name" required>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="mb-3">
-              <label for="description" class="form-label">description</label>
-              <textarea class="form-control" name='disc' placeholder="Write Your Description" id="description" required style="min-height: 250px;height: 250px"></textarea>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <!-- Upload Image -->
+                        <!-- Upload Image -->
             <div class='text-center'>
               <i class="file-image">
                 <input autocomplete="off" id="image" name="thumbnail" type="file" onchange="readImage(this)" title="" required />
@@ -33,6 +25,12 @@
                   <label for="image" class="image" data-label="Add thumbnail"></label>
                 </div>
               </i>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="description" class="form-label">description</label>
+              <textarea class="form-control" name='disc' placeholder="Write Your Description" id="description" required style="height: 350px"></textarea>
             </div>
           </div>
         </div>
