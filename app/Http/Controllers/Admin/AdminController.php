@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Control_Page;
+use App\Models\FAQ;
 use App\Models\OurTeam;
+use App\Models\Partner;
 use App\Models\ServicesGroup;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,86 +36,158 @@ class AdminController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function viewabout(){
-        $data = About::get()->first();
+      $data = About::get()->first();
+      $user = Auth::user();
+      if($user->can('about')){
         return view('admin.about',compact('data'));
+      }else{
+        return abort(404,'User Not Access');
+      }
+    }
+    public function partners(){
+      $user = Auth::user();
+      $partners = Partner::get()->all();
+      if($user->can('partners')){
+        return view('admin.partners',compact('partners'));
+      }else{
+        return abort(404,'User Not Access');
+      }
     }
     public function clients(){
-        $clients = Client::orderBy('id', 'DESC')->get()->all();
+      $clients = Client::orderBy('id', 'DESC')->get()->all();
+      $user = Auth::user();
+      if($user->can('clients')){
         return view('admin.clients',compact('clients'));
+      }else{
+        return abort(404,'User Not Access');
+      }
+    }
+    public function faq(){
+      $user = Auth::user();
+      if($user->can('faq')){
+        $faqs = FAQ::get()->all();
+        return view('admin.faq',compact('faqs'));
+      }else{
+        return abort(404,'User Not Access');
+      }
+
     }
     public function contact(){
+      $user = Auth::user();
+      if($user->can('contact')){
         $contacts = Contact::orderBy('id', 'DESC')->get()->all();
         return view('admin.contact',compact('contacts'));
+      }else{
+        return abort(404,'User Not Access');
+      }
     }
     public function copyright(){
-        $data = CopyRight::get()->all();
+      $data = CopyRight::get()->all();
+      $user = Auth::user();
+      if($user->can('copyright')){
         return view('admin.copyright',compact(['data']));
+      }else{
+        return abort(404,'User Not Access');
+      }
     }
     public function general(){
-        if(Social::get()->count() > 0){
-            $social = Social::get()->first();
-        }else{
-            $social = [];
-        }
+      if(Social::get()->count() > 0){
+        $social = Social::get()->first();
+      }else{
+        $social = [];
+      }
+      $user = Auth::user();
+      if($user->can('social')){
         return view('admin.general',compact('social'));
+      }else{
+        return abort(404,'User Not Access');
+      }
     }
     public function group(){
-        $counter = 1;
-        $groups = Group::get()->All();
-        if(!empty($groups)){
-          $counter = Group::max('id') + 1;
-        }
+      $counter = 1;
+      $groups = Group::get()->All();
+      if(!empty($groups)){
+        $counter = Group::max('id') + 1;
+      }
+      $user = Auth::user();
+      if($user->can('groups')){
         return view('admin.group',compact('groups','counter'));
+      }else{
+        return abort(404,'User Not Access');
+      }
     }
 
     public function view_our_team(){
       $team = OurTeam::get()->all();
-      return view('admin.our_team',compact('team'));
+      $user = Auth::user();
+      if($user->can('our_team')){
+        return view('admin.our_team',compact('team'));
+      }else{
+        return abort(404,'User Not Access');
+      }
     }
 
     public function project(){
-        $groups = Group::get()->all();
-        if(!empty($groups)){
-            $projects = Project::where('groupid',$groups[0]->id)->select(['id','title'])->get();
-        }else{
-            $projects =[];
-        }
+      $groups = Group::get()->all();
+      if(!empty($groups)){
+        $projects = Project::where('groupid',$groups[0]->id)->select(['id','title'])->get();
+      }else{
+        $projects =[];
+      }
+      $user = Auth::user();
+      if($user->can('projects')){
         return view('admin.project',compact('groups','projects'));
+      }else{
+        return abort(404,'User Not Access');
+      }
     }
     public function details(){
-        $projects = Project::select(['id','title'])->get()->all();
-        if(!empty($projects)){
-            $sections = Section::where('project_id',$projects[0]->id)->select(['id','name'])->get();
-        }else{
-            $sections = [];
-        }
-        return view('admin.details_project',compact('projects','sections'));
-    }
+      $projects = Project::select(['id','title'])->get()->all();
+      if(!empty($projects)){
+        $sections = Section::where('project_id',$projects[0]->id)->select(['id','name'])->get();
+      }else{
+        $sections = [];
+      }
 
-    public function reg(){
-        return view('auth.register');
+      $user = Auth::user();
+      if($user->can('details')){
+        return view('admin.details_project',compact('projects','sections'));
+      }else{
+        return abort(404,'User Not Access');
+      }
     }
 
     public function services(){
+      $services = Services::orderBy('id', 'DESC')->get()->all();
       $groups = ServicesGroup::get()->all();
-      if(!empty($groups)){
-        $services = Services::where('group_id',$groups[0]->id)->select(['id','title'])->get();
+      $user = Auth::user();
+      if($user->can('services')){
+        return view('admin.services',compact('services','groups'));
       }else{
-        $services =[];
+        return abort(404,'User Not Access');
       }
-      return view('admin.services',compact('groups','services'));
     }
     public function View_sort_projects(){
-
       $projects = Project::select(['id','title','image'])->orderBy("sort_project")->get();
-
-      return view('admin.sort_projects',compact('projects'));
+      $user = Auth::user();
+      if($user->can('sort_projects')){
+        return view('admin.sort_projects',compact('projects'));
+      }else{
+        return abort(404,'User Not Access');
+      }
     }
 
     public function services_group(){
       $groups = ServicesGroup::get()->all();
-      return view('admin.services_group',compact('groups',));
+
+      $user = Auth::user();
+      if($user->can('group_services')){
+        return view('admin.services_group',compact('groups',));
+      }else{
+        return abort(404,'User Not Access');
+      }
     }
 
     function ReturnSucsess($status , $msg){
@@ -124,11 +198,16 @@ class AdminController extends Controller
     }
 
     function View_data(){
-        date_default_timezone_set("Africa/Cairo");
-        $date = date("Y-m-d");
-        $counter = counter_visitor::where(['date'=>$date])->orderBy('id', 'DESC')->get();
-        $data = DataSheet::get()->first();
+      date_default_timezone_set("Africa/Cairo");
+      $date = date("Y-m-d");
+      $counter = counter_visitor::where(['date'=>$date])->orderBy('id', 'DESC')->get();
+      $data = DataSheet::get()->first();
+      $user = Auth::user();
+      if($user->can('view_data')){
         return view('admin.datasheet',compact('data','counter'));
+      }else{
+        return abort(404,'User Not Access');
+      }
     }
 
     public function View_control_page(){
@@ -170,24 +249,44 @@ class AdminController extends Controller
 
     #################### Group Page ###########################
     public function save_services_group(Request $request){
-      switch($request->action){
-        case 'save':{
-          $save = ServicesGroup::create([
-            'group'=>$request->groupName,
+      $file = new Filesystem;
+      $file = $this->saveimage($request->image, 'Admin/Services');
+      $save = ServicesGroup::create([
+        'group'=>$request->name,
+        'image'=>$file,
+        'disc'=>$request->disc,
+      ]);
+      if($save){return $this->ReturnSucsess('true', $save->id);}
+    }
+    #################### Group Page ###########################
+
+    public function get_update_services_group(Request $request){
+      $project = ServicesGroup::limit(1)->where('id',$request->id)->first();
+      if($project){return $this->ReturnSucsess('true',$project);}
+    }
+
+    public function update_services_group(Request $request){
+
+      $service = ServicesGroup::limit(1)->where(['id'=>$request->project_id])->first();
+      if($request->image == null){
+          $update = ServicesGroup::limit(1)->where(['id'=>$request->project_id])->update([
+              'group'    => $request->name,
+              'disc'     => $request->disc,
           ]);
-          if($save){return $this->ReturnSucsess('true', $save->id);}
-        }break;
-        case 'update':{
-          $save = ServicesGroup::where(['id'=>$request->groupId])->update([
-            'group'=>$request->groupName,
+          if($update){return $this->ReturnSucsess('true', 'Updated Group');}
+      }else{
+          $image_path = 'Admin/Services/'. $service->image;
+          if(File::exists($image_path)){
+              File::delete($image_path);
+          }
+          $file = new Filesystem;
+          $file = $this->saveimage($request->image, 'Admin/Services');
+          $update = ServicesGroup::limit(1)->where(['id'=>$request->project_id])->update([
+              'group'    => $request->name,
+              'disc'     => $request->disc,
+              'image'    => $file
           ]);
-          if($save){return $this->ReturnSucsess('true', 'Updated Ggroup');}
-        }break;
-        case 'del':{
-          $save = ServicesGroup::where(['id'=>$request->groupId])->delete();
-          if($save){return $this->ReturnSucsess('true', 'Delete Ggroup');}
-        }
-          break;
+          if($update){return $this->ReturnSucsess('true', 'Updated Group');}
       }
     }
 
@@ -662,4 +761,51 @@ class AdminController extends Controller
     $projects = Services::where('group_id',$request->group)->select(['id','title'])->get();
     return $this->ReturnSucsess('true', $projects);
   }
+
+  ########################## Save Client ######################
+  public function save_partners(Request $request){
+    if($request->client != null){
+      $file = new Filesystem;
+      $file = $this->saveimage($request->client, 'Admin/Partners');
+      $save = Partner::create([
+        'image' => $file,
+      ]);
+      if($save){return response()->json(['status'=>'true','id'=>$save->id,'image'=>$file]);}
+    }
+  }
+
+  ###################### Delete Client #######################
+  public function delete_partners(Request $request){
+    $client = Partner::where(['id'=>$request->client])->first();
+    $image_path = 'Admin/Partners/'. $client->image;
+    File::delete($image_path);
+    $delclient = Partner::where(['id'=>$request->client])->delete();
+    if($delclient){return $this->ReturnSucsess('true', 'Deleted Client');}
+
+  }
+
+  #################### save FAQ ###############################3
+  public function save_faq (Request $request){
+    $saveFaq = FAQ::create([
+      'question'=>$request->question,
+      'answer'=>$request->answer,
+    ]);
+    if($saveFaq){return $this->ReturnSucsess('true', 'Save Question');}
+  }
+
+  #################### Update FAQ ###############################3
+  public function update_faq (Request $request){
+    $saveFaq = FAQ::limit(1)->where(['id'=>$request->id])->update([
+      'question'=>$request->question,
+      'answer'=>$request->answer,
+    ]);
+    if($saveFaq){return $this->ReturnSucsess('true', 'Update Question');}
+  }
+
+  #################### Delete FAQ ###############################3
+  public function delete_faq (Request $request){
+    $saveFaq = FAQ::limit(1)->where(['id'=>$request->id])->delete();
+    if($saveFaq){return $this->ReturnSucsess('true', 'Delete Question');}
+  }
+
 }

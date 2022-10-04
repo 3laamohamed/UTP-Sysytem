@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServicesGroupsTable extends Migration
+class CreatePartnersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateServicesGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('services_groups', function (Blueprint $table) {
+        Schema::create('partners', function (Blueprint $table) {
           $table->bigIncrements('id');
-          $table->string('group')->nullable();
-          $table->string('image')->nullable();
-          $table->text('disc')->nullable();
+          $table->string('image');
           $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateServicesGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services_groups');
+        Schema::dropIfExists('partners');
     }
 }

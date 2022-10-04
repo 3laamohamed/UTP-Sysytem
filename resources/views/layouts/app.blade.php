@@ -52,23 +52,26 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.View_sort_projects')}}"> sort projects </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.project')}}"> projects </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.details')}}"> project details </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.group')}}"> projects group </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.clients')}}"> clients </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.contact')}}"> contact </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.copyright')}}"> copyright </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.general')}}"> social </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.about')}}"> about </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.group_services')}}"> services Group </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.services')}}"> services </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.View_data')}}"> view data </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.View_control_page')}}"> control pages </a></li>
-                      <li class="nav-item"><a class="nav-link" href="{{Route('admin.View_our_team')}}"> our team </a></li>
-                    </ul>
+                  <ul class="navbar-nav me-auto">
+                    @can('sort_projects')<li class="nav-item"><a class="nav-link" href="{{Route('admin.View_sort_projects')}}"> sort projects </a></li>@endcan
+                    @can('projects')<li class="nav-item"><a class="nav-link" href="{{Route('admin.project')}}"> projects </a></li>@endcan
+                    @can('details')<li class="nav-item"><a class="nav-link" href="{{Route('admin.details')}}"> details details </a></li>@endcan
+                    @can('groups')<li class="nav-item"><a class="nav-link" href="{{Route('admin.group')}}"> projects group </a></li>@endcan
+                    @can('clients')<li class="nav-item"><a class="nav-link" href="{{Route('admin.clients')}}"> clients </a></li>@endcan
+                    @can('contact')<li class="nav-item"><a class="nav-link" href="{{Route('admin.contact')}}"> contact </a></li>@endcan
+                    @can('copyright')<li class="nav-item"><a class="nav-link" href="{{Route('admin.copyright')}}"> copyright </a></li>@endcan
+                    @can('social')<li class="nav-item"><a class="nav-link" href="{{Route('admin.general')}}"> Social </a></li>@endcan
+                    @can('about')<li class="nav-item"><a class="nav-link" href="{{Route('admin.about')}}"> about </a></li>@endcan
+                    @can('group_services')<li class="nav-item"><a class="nav-link" href="{{Route('admin.group_services')}}"> services Group </a></li>@endcan
+                    @can('services')<li class="nav-item"><a class="nav-link" href="{{Route('admin.services')}}"> services </a></li>@endcan
+                    @can('view_data')<li class="nav-item"><a class="nav-link" href="{{Route('admin.View_data')}}"> view data </a></li>@endcan
+                    @can('control_page')<li class="nav-item"><a class="nav-link" href="{{Route('admin.View_control_page')}}"> control pages </a></li>@endcan
+                    @can('our_team')<li class="nav-item"><a class="nav-link" href="{{Route('admin.View_our_team')}}"> our team </a></li>@endcan
+                    @can('partners')<liclass="nav-item"><a class="nav-link" href="{{Route('admin.partners')}}"> partners </a></li>@endcan
+                    @can('faq')<liclass="nav-item"><a class="nav-link" href="{{Route('admin.faq')}}"> FAQ </a></li>@endcan
+                    @can('user')<li><a class="nav-link" href="{{ route('users.index') }}">Users</a></li>@endcan
+                    @can('role')<li><a class="nav-link" href="{{ route('roles.index') }}">Role</a></li>@endcan
+                  </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -93,9 +96,6 @@
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                               <a class="dropdown-item" href="{{ URL('Admin/update_user/user=' . Auth::user()->id) }}">
                                 {{ __('Profile') }}
-                              </a>
-                              <a class="dropdown-item" href="{{ route('admin.reg') }}">
-                                {{ __('New User') }}
                               </a>
                               <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                    document.getElementById('logout-form').submit();">

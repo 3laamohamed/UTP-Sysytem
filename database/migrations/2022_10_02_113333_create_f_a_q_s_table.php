@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServicesGroupsTable extends Migration
+class CreateFAQSTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateServicesGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('services_groups', function (Blueprint $table) {
+        Schema::create('faq', function (Blueprint $table) {
           $table->bigIncrements('id');
-          $table->string('group')->nullable();
-          $table->string('image')->nullable();
-          $table->text('disc')->nullable();
+          $table->text('question')->nullable();
+          $table->text('answer')->nullable();
           $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateServicesGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services_groups');
+        Schema::dropIfExists('faq');
     }
 }

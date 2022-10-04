@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,24 +16,20 @@ use App\Http\Controllers\Admin\AdminController;
 */
 Route::get('/home', function () {
     return redirect()->route('admin.general');
-    // return redirect('/Admin/Project');
 });
-// Route::get('/login', function () {
-//     return redirect('/home');
-//     // return redirect('/Admin/Project');
-// });
 Route::get('/home'     , [App\Http\Controllers\Admin\AdminController::class, 'project']);
 
 Auth::routes();
-// Route::get('/', function () {
-//     return redirect('/main');
-// });
+
 Route::get('/'         , [App\Http\Controllers\Main\MainController::class, 'home'])      ->name('home');
 Route::post('/save_message', [App\Http\Controllers\Main\MainController::class,'save_message']) ->name('save.message');
 Route::post('/get_sections', [App\Http\Controllers\Main\MainController::class,'get_sections']) ->name('get.sections');
 Route::post('/get_details', [App\Http\Controllers\Main\MainController::class,'get_details']) ->name('get.details');
 
-
+Route::group(['middleware' => ['auth']], function() {
+  Route::resource('roles', RoleController::class);
+  Route::resource('users', UserController::class);
+});
 
 Route::group(['prefix' => 'Admin' , 'namespace' => 'Admin'] ,function()
 {
@@ -100,6 +98,9 @@ Route::group(['prefix' => 'Admin' , 'namespace' => 'Admin'] ,function()
 
     Route::get('/Services_group'    , [AdminController::class, 'services_group'])   ->name('admin.group_services');
       Route::post('/save_services_group', [AdminController::class,'save_services_group']) ->name('admin.save_services_group');
+      Route::post('/get_update_services_group',[AdminController::class,'get_update_services_group'])->name('admin.get_update_services_group');
+      Route::post('/update_services_group',[AdminController::class,'update_services_group'])->name('admin.update_services_group');
+
 
     Route::get('/View_our_team'      , [AdminController::class, 'view_our_team'])   ->name('admin.View_our_team');
         Route::post('/delete_person' , [AdminController::class,'delete_person'])    ->name('admin.delete.person');
@@ -107,6 +108,13 @@ Route::group(['prefix' => 'Admin' , 'namespace' => 'Admin'] ,function()
         Route::post('/update_person' , [AdminController::class,'update_person']) ->name('admin.update.person');
         Route::post('/get_update_person', [AdminController::class,'get_update_person']) ->name('admin.get.update.person');
 
+    Route::get('view_partners' , [AdminController::class , 'partners'])->name('admin.partners');
+        Route::post('/save_partners', [AdminController::class,'save_partners']) ->name('admin.save.partners');
+        Route::post('/delete_partners', [AdminController::class,'delete_partners']) ->name('admin.delete.partners');
+    Route::get('view_faq' , [AdminController::class , 'faq'])->name('admin.faq');
+      Route::post('/save_faq', [AdminController::class,'save_faq']) ->name('admin.save_faq');
+//      Route::post('/delete_partners', [AdminController::class,'delete_partners']) ->name('admin.delete.partners');
 });
+
 
 
