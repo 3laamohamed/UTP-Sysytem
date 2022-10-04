@@ -5,7 +5,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-  <h2 class="title">About<h2>
+  <h2 class="title">About</h2>
   <div class="row mt-3">
     <div class="col-md-10 offset-md-1">
     <form id="form_save_item" action=" " method="POST" multiple enctype="multipart/form-data">
@@ -14,12 +14,20 @@
         <div class="col-md-6">
           <div class="mb-3">
               @csrf
-              <label for="brand_name" class="form-label">Brand Name</label>
+              <label for="brand_name" class="form-label">Title</label>
               @if(isset($data->name))
-              <input type="text" value='{{$data->name}}' class="form-control" name='brand' id="brand_name" placeholder="Please Enter Brand Name">
+              <input type="text" value='{{$data->name}}' class="form-control" name='brand' id="brand_name" placeholder="Please Enter Title">
               @else
-              <input type="text"  class="form-control" name='brand' id="brand_name" placeholder="Please Enter Brand Name">
+              <input type="text"  class="form-control" name='brand' id="brand_name" placeholder="Please Enter Title">
               @endif
+          </div>
+          <div class="mb-3">
+            <label for="brand_name" class="form-label">Sub-Title</label>
+            @if(isset($data->sub_title))
+              <input type="text" value='{{$data->sub_title}}' class="form-control" name='subtitle' id="subtitle" placeholder="Please Enter Sub-Title">
+            @else
+              <input type="text"  class="form-control" name='subtitle' id="subtitle" placeholder="Please Enter Sub-Title">
+            @endif
           </div>
           <div class="mb-3">
             <label for="group_name" class="form-label">description</label>
@@ -27,6 +35,14 @@
             <textarea class="form-control mt-3" name='disc' placeholder="Write Your Discribtion" id="discribtion" style="min-height: 250px;height: 250px">{{$data->disc}}</textarea>
             @else
             <textarea class="form-control mt-3" name='disc' placeholder="Write Your Discribtion" id="discribtion" style="min-height: 250px;height: 250px"></textarea>
+            @endif
+          </div>
+          <div class="mb-3">
+            <label for="group_name" class="form-label">About</label>
+            @if(isset($data->about))
+              <textarea class="form-control mt-3" name='about' placeholder="Write Your About" id="about" style="min-height: 250px;height: 250px">{{$data->about}}</textarea>
+            @else
+              <textarea class="form-control mt-3" name='about' placeholder="Write Your About" id="about" style="min-height: 250px;height: 250px"></textarea>
             @endif
           </div>
         </div>
@@ -38,9 +54,9 @@
               <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
               <div id='item-image'>
                 @if(!empty($data->image))
-                <label for="image" class="image unvisibile"  data-label="Add Image" style="background-image: url({{ URL::asset('Admin/About/' . $data->image) }})"></label>
+                  <label for="image" class="image unvisibile"  data-label="Add Image" style="background-image: url({{ URL::asset('Admin/About/' . $data->image) }})"></label>
                 @else
-                <label for="image" class="image"  data-label="Add Image"></label>
+                  <label for="image" class="image"  data-label="Partner Main"></label>
                 @endif
               </div>
             </i>

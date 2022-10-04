@@ -1,196 +1,260 @@
 @extends('layouts.main')
 @section('content')
-<!-- Start Loader -->
-<div class="loading">
-  <div class="dot"></div>
-  <div class="dot"></div>
-  <div class="dot"></div>
-</div>
-<!-- End Loader -->
-@if(isset($about->image))
-<main style="background-image: url({{asset('Admin/About/' . $about->image)}})">
-@endif
-    <!-- Start Navbar -->
-    <nav class="navbar navbar-expand-md">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-            @if(isset($about->logo))
-            <img src="{{asset('Admin/About/' . $about->logo)}}" alt="" width="80" height="50">
-            @endif
-        </a>
-        <button id="open-nav" class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <div class="navbar-collapse">
-          <ul class="navbar-nav mb-2 mb-lg-0">
-            <div class="close-nav d-block d-md-none" id="close-nav">
-              <span></span>
-              <span></span>
-            </div>
-            <li class="nav-item">
-              <a class="nav-link active" href="#Home" data-scroll="Home">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#services" data-scroll="services">Services</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#projects" data-scroll="projects">Projects</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#clients" data-scroll="clients">Clients</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#copyright" data-scroll="copyright">Copyright</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contact" data-scroll="contact">Contact</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- End Navbar -->
-    <header class="check-scroll" id='Home'>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-9 text-center">
-            <div class="text-contant">
-              @if(isset($about->name))
-              <h4>I'm {{$about->name}} </h4>
-              @endif
-              @if(isset($about->disc))
-              <h1>{{$about->disc}}</h1>
-              @endif
-            </div>
+  <!-- Start Header -->
+  <header class="check-scroll" id='Home'>
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-6">
+          <div class="text-contant">
+            <h1>
+              @if(isset($about->name)){{$about->name}}@endif <br />
+              <span>@if(isset($about->sub_title)){{$about->sub_title}}@endif</span>
+            </h1>
+            <p class="lead mb-3 fs-4">@if(isset($about->disc)){{$about->disc}}@endif</p>
+            <a href="./about.html" class="main-btn d-inline-block py-2 px-4 fs-4">More About Us</a>
           </div>
         </div>
-      </div>
-    </header>
-</main>
-  <!-- Modal -->
-  <div class="modal fade modal-xl" id="project_modal" tabindex="-1" aria-labelledby="project_modal_label"
-    aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen-lg-down modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal_title"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body p-5">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="discription text-center">
-                <p id="project_disc"></p>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <ul class="nav nav-pills mb-3" id="details-tab" role="tablist"></ul>
-              <div class="tab-content" id="pills-tabContent">
-                <div class="image-container" id="lightgallery"></div>
-              </div>
-            </div>
-          </div>
+        <div class="col-md-6">
+          <img src="{{asset('global/images/header.png')}}" alt="Header" class="img-fluid w-100">
         </div>
       </div>
     </div>
-  </div>
+  </header>
+  <!-- End Header -->
+  <!-- Start About -->
+  <section class="about py-5 position-relative">
+    <div class="container">
+      <h2 class="special-title">About</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <img src="{{asset('global/images/about.png')}}" alt="About" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+          <p class="lead">
+            @if(isset($about->about))
+                {{$about->about}}
+            @endif
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="shapes circle-shape first"></div>
+    <div class="shapes dots-shape"></div>
+    <div class="shapes triangle-shape"></div>
+    <div class="shapes circle-shape last"></div>
+  </section>
+  <!-- End About -->
 
   <!-- Start Services -->
-  <section id="services" class="services check-scroll">
-    <h2 class="special-title">Services</h2>
+  <section class="services py-5 position-relative">
     <div class="container">
-      <div class="owl-carousel services-carousel">
-        @foreach($services as $service)
-          <div class="item">
-            <div class="service">
-              <div class="image">
-                <img src="{{asset('Admin/Services/' . $service->image)}}" alt="">
-              </div>
-              <h3>{{$service->title}}</h3>
-              <p>{{$service->disc}}</p>
+      <h2 class="special-title">Our Services</h2>
+      <div class="row">
+        <div class="col-xl-3 col-lg-4 col-md-6 my-5">
+          <div class="service-box">
+            <div class="service-image">
+              <img src="./images/services/01.png" alt="service">
             </div>
+            <h3 class="service-title">Database</h3>
+            <p>UTP provides all Oracle database administration services including standalone, oracle
+              restart</p>
+            <a href="#" class="box-footer">
+              <span>Read More</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
           </div>
-        @endforeach
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 my-5">
+          <div class="service-box">
+            <div class="service-image">
+              <img src="./images/services/02.png" alt="service">
+            </div>
+            <h3 class="service-title">Oracle EBS Application</h3>
+            <p>UTP provides all versions of oracle E-Business suite application services (Installing, Patching, Cloning,
+              upgrading, and Administration).</p>
+            <a href="#" class="box-footer">
+              <span>Read More</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 my-5">
+          <div class="service-box">
+            <div class="service-image">
+              <img src="./images/services/03.png" alt="service">
+            </div>
+            <h3 class="service-title">MS Windows Server OS</h3>
+            <p>UTP provides Microsoft Windows Server OS administration services (administration, installation,
+              maintaining, upgrade, migration, upgrade, and troubleshooting services) for all versions.
+            </p>
+            <a href="#" class="box-footer">
+              <span>Read More</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-md-6 my-5">
+          <div class="service-box">
+            <div class="service-image">
+              <img src="./images/services/04.png" alt="service">
+            </div>
+            <h3 class="service-title">Exadata Administration</h3>
+            <p>UTP provides all Exadata versions administration services for all Exadata types whether bare-metal or
+              virtualized for Eighth, quarter, half, or full Exadata RAC (administration, Issues Investigation,
+              Performance tuning, re-imaging, and patching).</p>
+            <a href="#" class="box-footer">
+              <span>Read More</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
   <!-- End Services -->
 
-  <!-- Start Projects -->
-  <section id='projects' class="projects  check-scroll">
-    <h2 class="special-title">Projects</h2>
+  <!-- Start Partner -->
+  <section class="partner py-5 position-relative">
     <div class="container">
-      <ul class="categories">
-        <li class="category active" value='all' data-filter="all">all</li>
-        @foreach($groups as $group)
-        @php
-        $newgroup = str_replace(' ','_',$group->group);
-        echo "<li class='category' value='$group->id' data-filter='$newgroup'>$group->group</li>";
-        @endphp
-        @endforeach
-      </ul>
-      <div class="cards-container">
-        @foreach($projects as $project)
-        @php
-        $newgroup = str_replace(' ','_',$project->groupname);
-        echo "<div data-id='$project->id' class='card shadow-lg cards $newgroup' data-bs-toggle='modal' data-bs-target='#project_modal'>";
-        @endphp
-          <div class="card-image">
-            <img src="{{asset('Admin/Projects/' . $project->image)}}" class="card-img-top" alt="{{$project->image}}">
-          </div>
-          <div class="card-body">
-            <p class="card-text text-white">{{$project->title}}</p>
-            <span class="d-none">{{$project->disc}}</span>
-          </div>
+      <h2 class="special-title">Partner</h2>
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <p class="lead lh-lg">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe voluptates sint omnis corporis, aspernatur
+            iste illum rerum accusamus, pariatur obcaecati quo est numquam deleniti, odit aut dolores impedit sit? Nemo.
+            aspernatur
+            iste illum rerum accusamus, pariatur obcaecati quo est numquam deleniti, odit aut dolores impedit sit? Nemo.
+          </p>
         </div>
-        @endforeach
+        <div class="col-md-6">
+          <img src="./images/Oracle-Gold-Partner.png" alt="Partner" class="img-fluid">
+        </div>
       </div>
     </div>
   </section>
-  <!-- End Projects -->
+  <!-- End Partner -->
+
+  <!-- Start FAQ -->
+  <section class="faq py-5 position-relative">
+    <div class="container">
+      <h2 class="special-title">FAQ</h2>
+      <div class="row">
+        <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+          <div class="accordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faq_headOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq_one"
+                        aria-expanded="false" aria-controls="faq_one">
+                  question One
+                </button>
+              </h2>
+              <div id="faq_one" class="accordion-collapse collapse show" aria-labelledby="faq_headOne">
+                <div class="accordion-body">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore repellat dicta officiis voluptates
+                  quas et enim facilis
+                  voluptatum esse cumque amet beatae assumenda, in, consequatur eos eius, eveniet temporibus asperiores?
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faq_headTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq_two" aria-expanded="false" aria-controls="faq_two">
+                  question Two
+                </button>
+              </h2>
+              <div id="faq_two" class="accordion-collapse collapse" aria-labelledby="faq_headTwo">
+                <div class="accordion-body">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore repellat dicta officiis voluptates
+                  quas et enim facilis
+                  voluptatum esse cumque amet beatae assumenda, in, consequatur eos eius, eveniet temporibus asperiores?
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faq_headThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq_three" aria-expanded="false" aria-controls="faq_three">
+                  question Three
+                </button>
+              </h2>
+              <div id="faq_three" class="accordion-collapse collapse" aria-labelledby="faq_headThree">
+                <div class="accordion-body">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore repellat dicta officiis voluptates
+                  quas et enim facilis
+                  voluptatum esse cumque amet beatae assumenda, in, consequatur eos eius, eveniet temporibus asperiores?
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faq_headFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#faq_four" aria-expanded="true" aria-controls="faq_four">
+                  question Four
+                </button>
+              </h2>
+              <div id="faq_four" class="accordion-collapse collapse " aria-labelledby="faq_headFour">
+                <div class="accordion-body">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore repellat dicta
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End FAQ -->
 
   <!-- Start Clients -->
-  <section class="clients  check-scroll" id="clients">
-    <h2 class="special-title">Clients</h2>
+  <section class="clients  py-5 position-relative">
+    <h2 class="special-title">Our Clients</h2>
     <div class="container">
       <div class="owl-carousel clients-carousel">
-        @foreach($clients as $client)
         <div class="item">
-          <img src="{{asset('Admin/Clients/' .$client->image)}}" alt="{{$client->image}}">
+          <img src="./images/clients/client1.png" alt="clients">
         </div>
-        @endforeach
+        <div class="item">
+          <img src="./images/clients/client2.png" alt="clients">
+        </div>
+        <div class="item">
+          <img src="./images/clients/client3.png" alt="clients">
+        </div>
+        <div class="item">
+          <img src="./images/clients/client4.png" alt="clients">
+        </div>
+        <div class="item">
+          <img src="./images/clients/client5.png" alt="clients">
+        </div>
+        <div class="item">
+          <img src="./images/clients/client6.png" alt="clients">
+        </div>
+        <div class="item">
+          <img src="./images/clients/client7.png" alt="clients">
+        </div>
+        <div class="item">
+          <img src="./images/clients/client8.png" alt="clients">
+        </div>
+        <div class="item">
+          <img src="./images/clients/client9.png" alt="clients">
+        </div>
+        <div class="item">
+          <img src="./images/clients/client10.png" alt="clients">
+        </div>
       </div>
     </div>
   </section>
   <!-- End Clients -->
 
-  <!-- Start CopyRight -->
-  <section class="copyright  check-scroll" id="copyright">
-    <h2 class="special-title">&copy; Copyright</h2>
-    <div class="container">
-        @if(isset($copyright->name))
-        <pre class="fs-5 text-center">{{$copyright->name}}</pre>
-        @endif
-    </div>
-  </section>
-  <!-- End CopyRight -->
-
   <!-- Start Contact -->
-  <section class="contact check-scroll" id="contact">
+  <section class="contact py-5 position-relative">
     <div class="container">
-      <div class="row">
-        @if($get_data->status_v == 1 || $get_data->status_p == 1)
-        <div class="col-md-6 py-5">
-        @else
-        <div class="col-md-8 offset-md-2 py-5">
-        @endif
+      <h2 class="special-title">Contact</h2>
+      <div class="row align-items-center">
+        <div class="col-md-8 mb-3">
           <div class="row">
-            <h2 class="special-title">Contact</h2>
             <div class="col-12">
               <div class="mb-3">
-                @csrf
                 <label for="user_name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="user_name" placeholder="please Enter Your Name">
               </div>
@@ -204,7 +268,8 @@
             <div class="col-md-6">
               <div class="mb-3">
                 <label for="user_phone" class="form-label">Phone</label>
-                <input type="text" maxlength="11" class="form-control" id="user_phone" placeholder="please Enter Your Phone">
+                <input type="text" maxlength="11" class="form-control" id="user_phone"
+                       placeholder="please Enter Your Phone">
               </div>
             </div>
             <div class="col-12">
@@ -214,82 +279,25 @@
               </div>
             </div>
             <div class="d-grid gap-2 col-12 col-lg-4 col-md-6 mx-auto">
-                <button class="clicked" id="save_message" type="button">Send</button>
+              <button class="main-btn p-2 fs-4" id="save_message" type="button">Send</button>
             </div>
           </div>
         </div>
-        @if($get_data->status_v == 1 || $get_data->status_p == 1)
-        <div class="col-md-6 stats py-5">
-          <h2 class="special-title">Awesome Stats</h2>
-          @if(asset($get_data->status_v))
-            @if($get_data->status_v == 1)
-            <div class="box">
-              <i class="fa-solid fa-users"></i>
-              <h3 class="count-number">{{$get_data->visitors + 1}}</h3>
-              <h4 class="gradi-color">Users</h4>
-            </div>
-            @endif
-          @endif
-          @if(asset($get_data->status_p))
-            @if($get_data->status_p == 1)
-          <div class="box">
-            <i class="fa-solid fa-gears"></i>
-            <h3 class="count-number">{{$get_data->projects}}</h3>
-            <h4 class="gradi-color">Projects</h4>
-          </div>
-            @endif
-          @endif
+        <div class="col-md-4">
+          <a href="mailto:Sales@utpsys.com"
+             class="d-flex align-items-center justify-content-start flex-column gap-1 mb-5">
+            <i class="fa-solid fa-envelope fa-4x fa-fw"></i>
+            <span class="fs-4 text-dark">Sales@utpsys.com</span>
+          </a>
+          <a href="https://maps.app.goo.gl/ciDkUnNm3E6iZ7Cx8" target="_blank"
+             class="d-flex align-items-center justify-content-start flex-column gap-1 mb-5">
+            <i class="fa-solid fa-location-dot fa-4x fa-fw"></i>
+            <span class="fs-4 text-dark text-center">20 Ahmed Al Shatouri, Ad Doqi, Dokki, Giza Governorate
+              3750232</span>
+          </a>
         </div>
-        @endif
       </div>
     </div>
   </section>
   <!-- End Contact -->
-
-  <!-- Start Footer -->
-  <footer class="py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6 left-footer">
-          <p>Copyright &copy; @if(isset($about->name)){{$about->name}}@endif</p>
-        </div>
-        <div class="col-sm-6">
-          <div class="right-footer">
-            @if(isset($social->facebook))
-            <a href="{{$social->facebook}}" target="_blank" class="text-decoration-none"><i class="fa-brands fa-fw fa-facebook-f"></i></a>
-            @endif
-            @if(isset($social->whats))
-            <a href="https://api.whatsapp.com/send?phone={{$social->whats}}" target="_blank" class="text-decoration-none"><i class="fa-brands fa-fw fa-whatsapp"></i></a>
-            @endif
-            @if(isset($social->gmail))
-            <a href="mailto:{{$social->gmail}}" target="_blank" class="text-decoration-none"><i class="fa-brands fa-google-plus-g"></i></a>
-            @endif
-            @if(isset($social->linkedin))
-            <a href="{{$social->linkedin}}" target="_blank" class="text-decoration-none"><i class="fa-brands fa-fw fa-linkedin-in"></i></a>
-            @endif
-            @if(isset($social->twitter))
-            <a href="{{$social->twitter}}" target="_blank" class="text-decoration-none"><i class="fa-brands fa-fw fa-twitter"></i></a>
-            @endif
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- End Footer -->
-
-  <!-- Start Up Button -->
-  <button class="up">
-    <i class="fa-solid fa-chevron-up"></i>
-  </button>
-  <!-- End Up Button -->
-
-  <script>
-let _token=$("input[name=\"_token\"]").val();$("body").on("click","#save_message",function(){let a=$("#user_name").val(),b=$("#user_email").val(),c=$("#user_phone").val(),d=$("#message").val();action="save";$("tbody").html();$.ajax({url:"{{route('save.message')}}",method:"post",enctype:"multipart/form-data",data:{_token,name:a,email:b,phone:c,message:d},success:function(a){"true"==a.status&&(Swal.fire({position:"center",icon:"success",title:"Saved Message",showConfirmButton:!1,timer:1500}),$("#user_name").val(""),$("#user_email").val(""),$("#user_phone").val(""),$("#message").val(""))}})});const projectModal=document.getElementById("project_modal");projectModal.addEventListener("show.bs.modal",a=>{const b=a.relatedTarget,c=b.querySelector("p").textContent,d=b.querySelector("span").textContent,e=b.dataset.id;document.getElementById("modal_title").textContent=c,document.getElementById("project_disc").textContent=d,$.ajax({url:"{{route('get.sections')}}",method:"post",enctype:"multipart/form-data",data:{_token,id:e},success:function(a){if("true"===a.status){let b="";b+=`<li class="nav-item">
-                <button class="nav-link" projectid='${e}' data-id="all" type="button"  data-bs-toggle="pill" >all</button>
-              </li>`;let c=document.getElementById("details-tab");a.sections.forEach(a=>{b+=`<li class="nav-item">
-                <button class="nav-link" projectid='${e}' data-id="${a.id}" type="button"  data-bs-toggle="pill" >${a.name}</button>
-              </li>`}),c.innerHTML=b,c.querySelectorAll(".nav-link")[0].click()}}})}),$("body").on("click","#details-tab .nav-link",function(){let a=$(this).attr("data-id"),b=$(this).attr("projectid"),c="";$.ajax({url:"{{route('get.details')}}",method:"post",enctype:"multipart/form-data",data:{_token,id:a,pro:b},success:function(a){if("true"===a.status){for(let b=0;b<a.details.length;b++)c+=`<a href="{{asset('Admin/Details/${a.details[b].image}')}}">
-                        <img src="{{asset('Admin/Details/${a.details[b].image}')}}">
-            </a>`;$("#lightgallery").html(c),lightGallery(document.getElementById("lightgallery"))}}})}),projectModal.addEventListener("hidden.bs.modal",()=>{document.getElementById("lightgallery").innerHTML=""});let clinetOwl=$(".clients-carousel");clinetOwl.owlCarousel({loop:!0,margin:10,autoplay:!0,autoplayTimeout:2e3,autoplayHoverPause:!0,nav:!0,responsive:{0:{items:1},576:{items:2},768:{items:4},992:{items:5}}});
-  </script>
-  @stop
+@stop

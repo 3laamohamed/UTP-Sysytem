@@ -329,8 +329,10 @@ class AdminController extends Controller
         $save = About::create([
             'image'=>$file,
             'name' =>$request->brand,
+            'sub_title'=>$request->subtitle,
             'disc' =>$request->disc,
-            'logo' =>$logo
+            'logo' =>$logo,
+            'about'=>$request->about
         ]);
         if($save){return $this->ReturnSucsess('true', 'Saved About');}
     }

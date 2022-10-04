@@ -113,7 +113,8 @@ Route::group(['prefix' => 'Admin' , 'namespace' => 'Admin'] ,function()
         Route::post('/delete_partners', [AdminController::class,'delete_partners']) ->name('admin.delete.partners');
     Route::get('view_faq' , [AdminController::class , 'faq'])->name('admin.faq');
       Route::post('/save_faq', [AdminController::class,'save_faq']) ->name('admin.save_faq');
-//      Route::post('/delete_partners', [AdminController::class,'delete_partners']) ->name('admin.delete.partners');
+      Route::post('/update_faq', [AdminController::class,'update_faq']) ->name('admin.update_faq');
+      Route::post('/delete_faq', [AdminController::class,'delete_faq']) ->name('admin.delete_faq');
 });
 
 
