@@ -5,7 +5,6 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-  <h2 class="title">Projects</h2>
   <div class="row mt-3 project">
     <div class="col-md-10 offset-md-1">
       <form  id="project_form" action=" " method="POST" multiple enctype="multipart/form-data">
@@ -17,14 +16,6 @@
                 <label for="project_name" class="form-label">Project Name</label>
                 <input type="text" class="form-control" name="label" id="project_name" placeholder="Please Enter Project Name" required>
             </div>
-          </div>
-          <div class="col-md-6">
-            <label for="group" class="form-label">Select Group</label>
-            <select class="form-select" id='group' name="group" required>
-              @foreach($groups as $group)
-              <option value="{{$group->id}}">{{$group->group}}</option>
-              @endforeach
-            </select>
           </div>
           <div class="col-md-6">
             <div class="mb-3">

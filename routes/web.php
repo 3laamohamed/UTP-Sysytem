@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Main\MainController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 /*
@@ -113,8 +114,20 @@ Route::group(['prefix' => 'Admin' , 'namespace' => 'Admin'] ,function()
         Route::post('/delete_partners', [AdminController::class,'delete_partners']) ->name('admin.delete.partners');
     Route::get('view_faq' , [AdminController::class , 'faq'])->name('admin.faq');
       Route::post('/save_faq', [AdminController::class,'save_faq']) ->name('admin.save_faq');
-//      Route::post('/delete_partners', [AdminController::class,'delete_partners']) ->name('admin.delete.partners');
+      Route::post('/update_faq', [AdminController::class,'update_faq']) ->name('admin.update_faq');
+      Route::post('/delete_faq', [AdminController::class,'delete_faq']) ->name('admin.delete_faq');
+
+   Route::get('/View_SortGroupServices',[AdminController::class,'View_sort_group_services']) ->name('admin.View_sort_group_services');
+      Route::post('/save_sort_group_services', [AdminController::class,'save_sort_group_services']) ->name('admin.save_group_services');
+
+  Route::get('/View_SortServices',[AdminController::class,'View_sort_services']) ->name('admin.View_sort_services');
+      Route::post('/save_get_sort_services', [AdminController::class,'save_get_sort_services']) ->name('admin.save_get_sort_services');
+      Route::post('/save_sort_services', [AdminController::class,'save_sort_services']) ->name('admin.save_sort_services');
 });
+
+Route::get('/About',[MainController::class,'about'])->name('about');
+Route::get('/Contact',[MainController::class,'contact'])->name('contact');
+
 
 
 

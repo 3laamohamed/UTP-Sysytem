@@ -18,6 +18,7 @@ class CreateServicesGroupsTable extends Migration
           $table->string('group')->nullable();
           $table->string('image')->nullable();
           $table->text('disc')->nullable();
+          $table->integer('sort_project')->nullable();
           $table->timestamps();
         });
     }

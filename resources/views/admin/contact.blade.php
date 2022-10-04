@@ -5,7 +5,6 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-  <h2 class="title"> Contact </h2>
   <div class="cards-grid mt-3">
     @foreach($contacts as $contact)
     <div class="card shadow" cardId="{{$contact->id}}">

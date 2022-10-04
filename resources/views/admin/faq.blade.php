@@ -4,7 +4,6 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-  <h2 class="title">FAQ</h2>
       <div class="row mt-3">
         @csrf
         <div class="col-md-6 offset-md-3">

@@ -16,7 +16,9 @@ class About extends Migration
         Schema::create('about', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable();
+            $table->string('sub_title')->nullable();
             $table->text('disc')->nullable();
+            $table->text('about')->nullable();
             $table->string('image')->nullable();
             $table->string('logo')->nullable();
             $table->timestamps();

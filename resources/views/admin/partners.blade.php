@@ -5,7 +5,6 @@
 @extends('layouts.app')
 @section('content')
   <div class="container">
-    <h2 class="title">Partners</h2>
     <div class="row mt-3">
       <div class="col-md-10 offset-md-1">
         <form id="form_save_client" action=" " method="POST" multiple enctype="multipart/form-data"class="mb-3">
@@ -19,6 +18,9 @@
                 <label for="client" class="image" data-label="Add Image"></label>
               </div>
             </i>
+          </div>
+          <div class='text-center'>
+          <textarea name="disc" class="form-control mt-3" placeholder="Write Description" id="disc" style="height: 200px"></textarea>
           </div>
         </form>
         <div class="d-grid gap-2 col-6 mx-auto">
