@@ -2,9 +2,7 @@
 @extends('layouts.app')
 @section('content')
   <div class="container">
-    <h2 class="title">View Data</h2>
     <form class="d-flex align-items-center justify-content-center view-form" id="save_form" action=" " method="POST" multiple enctype="multipart/form-data">
-
       <div class="form-check form-switch" style="font-size:25px">
         @csrf
         @foreach($pages as $page)

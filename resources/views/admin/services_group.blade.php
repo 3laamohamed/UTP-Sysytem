@@ -5,7 +5,6 @@ $title = 'Project';
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h2 class="title">Services Group</h2>
         <div class="row mt-3 project">
             <div class="col-md-10 offset-md-1">
                 <form id="project_form" action=" " method="POST" multiple enctype="multipart/form-data">

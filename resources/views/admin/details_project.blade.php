@@ -6,7 +6,6 @@
 @section('content')
 <div class="container">
     {{-- <div class="d-none" id='counter_group' value='{{$counter}}'></div> --}}
-    <h2 class="title">Details</h2>
     <div class="row mt-3">
       <form  id="details_form" action=" " method="POST" multiple enctype="multipart/form-data">
         <div class="row align-items-end">

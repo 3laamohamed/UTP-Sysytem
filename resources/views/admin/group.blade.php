@@ -5,7 +5,6 @@ $title = 'Projects-Group';
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <h2 class="title">group</h2>
     <div class="row mt-3">
         <div class="col-md-6 offset-md-3">
             <div class="mb-3">

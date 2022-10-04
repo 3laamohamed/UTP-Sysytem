@@ -99,24 +99,24 @@
           <aside>
             <span id="close_menu" class="close rounded-3  d-block d-sm-none"> <i class="fa-solid fa-xmark"></i> </span>
             <ul class="">
-              @can('about')<li><a href="{{Route('admin.about')}}"><i class="fa-solid fa-address-card fa-xl"></i> <span>about</span> </a></li>@endcan
-              @can('groups')<li><a href="{{Route('admin.group')}}"><i class="fa-solid fa-layer-group fa-xl"></i> <span>projects group</span> </a></li>@endcan
-              @can('projects')<li><a href="{{Route('admin.project')}}"><i class="fa-solid fa-bars-progress fa-xl"></i> <span>projects</span> </a></li>@endcan
-              @can('details')<li><a href="{{Route('admin.details')}}"><i class="fa-solid fa-circle-info fa-xl"></i><span>details</span> </a></li>@endcan
-              @can('sort_projects')<li><a href="{{Route('admin.View_sort_projects')}}"> <i class="fa-solid fa-shuffle fa-xl"></i> <span>sort projects</span></a></li>@endcan
-              @can('group_services')<li><a href="{{Route('admin.group_services')}}"><i class="fa-solid fa-hard-drive fa-xl"></i> <span>services Group</span> </a></li>@endcan
-              @can('services')<li><a href="{{Route('admin.services')}}"><i class="fa-solid fa-server fa-xl"></i> <span>services</span> </a></li>@endcan
-              @can('clients')<li><a href="{{Route('admin.clients')}}"><i class="fa-solid fa-users fa-xl"></i> <span>clients</span> </a></li>@endcan
-              @can('contact')<li><a href="{{Route('admin.contact')}}"><i class="fa-solid fa-envelope fa-xl"></i> <span>contact</span> </a></li>@endcan
-              @can('copyright')<li><a href="{{Route('admin.copyright')}}"><i class="fa-solid fa-copyright fa-xl"></i> <span>copyright</span> </a></li>@endcan
-              @can('social')<li><a href="{{Route('admin.general')}}"><i class="fa-solid fa-hashtag fa-xl"></i> <span>Social</span> </a></li>@endcan
-              @can('view_data')<li><a href="{{Route('admin.View_data')}}"> <i class="fa-solid fa-table fa-xl"></i> <span>view data</span> </a></li>@endcan
-              @can('control_page')<li><a href="{{Route('admin.View_control_page')}}"><i class="fa-solid fa-folder-open fa-xl"></i> <span>control pages</span> </a></li>@endcan
-              @can('our_team')<li><a href="{{Route('admin.View_our_team')}}"><i class="fa-solid fa-people-group fa-xl"></i> <span>our team</span> </a></li>@endcan
-              @can('partners')<li><a href="{{Route('admin.partners')}}"><i class="fa-solid fa-handshake fa-xl"></i> <span>partners</span> </a></li>@endcan
-              @can('faq')<li><a href="{{Route('admin.faq')}}"><i class="fa-solid fa-circle-question fa-xl"></i> <span>FAQ</span> </a></li>@endcan
-              @can('role')<li><a href="{{ route('roles.index') }}"><i class="fa-solid fa-user-lock fa-xl"></i><span>Role</span></a></li>@endcan
-              @can('user')<li><a href="{{ route('users.index') }}"><i class="fa-solid fa-users fa-xl"></i> <span>Users</span></a></li>@endcan
+              @can('about')<li class="@if(Route::current()->getName() == 'admin.about') active @endif"><a href="{{Route('admin.about')}}"><i class="fa-solid fa-address-card fa-xl"></i> <span>about</span> </a></li>@endcan
+              @can('groups')<li class="@if(Route::current()->getName() == 'admin.group') active @endif"><a href="{{Route('admin.group')}}"><i class="fa-solid fa-layer-group fa-xl"></i> <span>projects group</span> </a></li>@endcan
+              @can('projects')<li class="@if(Route::current()->getName() == 'admin.project') active @endif"><a href="{{Route('admin.project')}}"><i class="fa-solid fa-bars-progress fa-xl"></i> <span>projects</span> </a></li>@endcan
+              @can('details')<li class="@if(Route::current()->getName() == 'admin.details') active @endif"><a href="{{Route('admin.details')}}"><i class="fa-solid fa-circle-info fa-xl"></i><span>details</span> </a></li>@endcan
+              @can('sort_projects')<li class="@if(Route::current()->getName() == 'admin.View_sort_projects') active @endif"><a href="{{Route('admin.View_sort_projects')}}"> <i class="fa-solid fa-shuffle fa-xl"></i> <span>sort projects</span></a></li>@endcan
+              @can('group_services')<li class="@if(Route::current()->getName() == 'admin.group_services') active @endif"><a href="{{Route('admin.group_services')}}"><i class="fa-solid fa-hard-drive fa-xl"></i> <span>services Group</span> </a></li>@endcan
+              @can('services')<li class="@if(Route::current()->getName() == 'admin.services') active @endif"><a href="{{Route('admin.services')}}"><i class="fa-solid fa-server fa-xl"></i> <span>services</span> </a></li>@endcan
+              @can('clients')<li class="@if(Route::current()->getName() == 'admin.clients') active @endif"><a href="{{Route('admin.clients')}}"><i class="fa-solid fa-users fa-xl"></i> <span>clients</span> </a></li>@endcan
+              @can('contact')<li class="@if(Route::current()->getName() == 'admin.contact') active @endif"><a href="{{Route('admin.contact')}}"><i class="fa-solid fa-envelope fa-xl"></i> <span>contact</span> </a></li>@endcan
+              @can('copyright')<li class="@if(Route::current()->getName() == 'admin.copyright') active @endif"><a href="{{Route('admin.copyright')}}"><i class="fa-solid fa-copyright fa-xl"></i> <span>copyright</span> </a></li>@endcan
+              @can('social')<li class="@if(Route::current()->getName() == 'admin.general') active @endif"><a href="{{Route('admin.general')}}"><i class="fa-solid fa-hashtag fa-xl"></i> <span>Social</span> </a></li>@endcan
+              @can('view_data')<li class="@if(Route::current()->getName() == 'admin.View_data') active @endif"><a href="{{Route('admin.View_data')}}"> <i class="fa-solid fa-table fa-xl"></i> <span>view data</span> </a></li>@endcan
+              @can('control_page')<li class="@if(Route::current()->getName() == 'admin.View_control_page') active @endif"><a href="{{Route('admin.View_control_page')}}"><i class="fa-solid fa-folder-open fa-xl"></i> <span>control pages</span> </a></li>@endcan
+              @can('our_team')<li class="@if(Route::current()->getName() == 'admin.View_our_team') active @endif"> <a href="{{Route('admin.View_our_team')}}"><i class="fa-solid fa-people-group fa-xl"></i> <span>our team</span> </a></li>@endcan
+              @can('partners')<li class="@if(Route::current()->getName() == 'admin.partners') active @endif"><a href="{{Route('admin.partners')}}"><i class="fa-solid fa-handshake fa-xl"></i> <span>partners</span> </a></li>@endcan
+              @can('faq')<li class="@if(Route::current()->getName() == 'admin.faq') active @endif"><a href="{{Route('admin.faq')}}"><i class="fa-solid fa-circle-question fa-xl"></i> <span>FAQ</span> </a></li>@endcan
+              @can('role')<li class="@if(Route::current()->getName() == 'roles.index') active @endif"><a href="{{ route('roles.index') }}"><i class="fa-solid fa-user-lock fa-xl"></i><span>Role</span></a></li>@endcan
+              @can('user')<li class="@if(Route::current()->getName() == 'users.index') active @endif"><a href="{{ route('users.index') }}"><i class="fa-solid fa-users fa-xl"></i> <span>Users</span></a></li>@endcan
             </ul>
           </aside>
           <!-- side Bar -->
