@@ -95,6 +95,7 @@
       @endif
 
         <main>
+          @if(Auth::user())
           <!-- side Bar -->
           <aside>
             <span id="close_menu" class="close rounded-3  d-block d-sm-none"> <i class="fa-solid fa-xmark"></i> </span>
@@ -120,6 +121,7 @@
             </ul>
           </aside>
           <!-- side Bar -->
+          @endif
           <!-- wrraper -->
           <div class="wrapper py-5">
             @yield('content')

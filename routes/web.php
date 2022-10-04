@@ -119,6 +119,8 @@ Route::group(['prefix' => 'Admin' , 'namespace' => 'Admin'] ,function()
 });
 
 Route::get('/About',[MainController::class,'about'])->name('about');
+Route::get('/Contact',[MainController::class,'contact'])->name('contact');
+
 
 
 

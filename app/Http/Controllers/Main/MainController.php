@@ -50,9 +50,10 @@ class MainController extends Controller
          $servicesGroups = ServicesGroup::orderBy("sort_project")->get();
          $faqs = FAQ::get()->all();
          $partners = Partner::get()->all();
+         $clients  = Client::inRandomOrder()->get()->all();
+
 //        $services = Services::get()->all();
 //        $groups   = Group::get()->all();
-//        $clients  = Client::inRandomOrder()->get()->all();
 //        $copyright= CopyRight::get()->first();
 //        $social   = Social::get()->first();
 //        $projects = Project::orderBy("sort_project")->get();
@@ -63,7 +64,7 @@ class MainController extends Controller
             'partners',
 //            'services',
 //            'groups',
-//            'clients',
+              'clients',
 //            'copyright',
 //            'social',
 //            'projects',
@@ -116,4 +117,16 @@ class MainController extends Controller
         'team',
       ]));
     }
+
+  public function contact(){
+    $about    = About::get()->first();
+    $team     = OurTeam::get()->all();
+    $social   = Social::get()->first();
+
+    return view('main.contact_us',compact([
+      'about',
+      'team',
+      'social',
+    ]));
+  }
 }

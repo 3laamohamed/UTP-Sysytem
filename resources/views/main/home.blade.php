@@ -78,18 +78,15 @@
       <div class="row align-items-center">
         <div class="col-md-6">
           <p class="lead lh-lg">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe voluptates sint omnis corporis, aspernatur
-            iste illum rerum accusamus, pariatur obcaecati quo est numquam deleniti, odit aut dolores impedit sit? Nemo.
-            aspernatur
-            iste illum rerum accusamus, pariatur obcaecati quo est numquam deleniti, odit aut dolores impedit sit? Nemo.
+            {{$partner->disc}}
           </p>
         </div>
         <div class="col-md-6">
-          <img src="./images/Oracle-Gold-Partner.png" alt="Partner" class="img-fluid">
+          <img src="{{asset('Admin/Partners/'. $partner->image)}}" alt="Partner" class="img-fluid">
         </div>
       </div>
+      @endforeach
     </div>
-    @endforeach
   </section>
   <!-- End Partner -->
 
@@ -127,36 +124,11 @@
     <h2 class="special-title">Our Clients</h2>
     <div class="container">
       <div class="owl-carousel clients-carousel">
+        @foreach($clients as $client)
         <div class="item">
-          <img src="./images/clients/client1.png" alt="clients">
+          <img src="{{asset('Admin/Clients/'.$client->image)}}" alt="clients">
         </div>
-        <div class="item">
-          <img src="./images/clients/client2.png" alt="clients">
-        </div>
-        <div class="item">
-          <img src="./images/clients/client3.png" alt="clients">
-        </div>
-        <div class="item">
-          <img src="./images/clients/client4.png" alt="clients">
-        </div>
-        <div class="item">
-          <img src="./images/clients/client5.png" alt="clients">
-        </div>
-        <div class="item">
-          <img src="./images/clients/client6.png" alt="clients">
-        </div>
-        <div class="item">
-          <img src="./images/clients/client7.png" alt="clients">
-        </div>
-        <div class="item">
-          <img src="./images/clients/client8.png" alt="clients">
-        </div>
-        <div class="item">
-          <img src="./images/clients/client9.png" alt="clients">
-        </div>
-        <div class="item">
-          <img src="./images/clients/client10.png" alt="clients">
-        </div>
+        @endforeach
       </div>
     </div>
   </section>
