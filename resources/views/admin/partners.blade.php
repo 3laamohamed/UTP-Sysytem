@@ -19,6 +19,9 @@
               </div>
             </i>
           </div>
+          <div class='text-center'>
+          <textarea name="disc" class="form-control mt-3" placeholder="Write Description" id="disc" style="height: 200px"></textarea>
+          </div>
         </form>
         <div class="d-grid gap-2 col-6 mx-auto">
           <button class="btn btn-success clicked" id="save_client" type="button">Save</button>

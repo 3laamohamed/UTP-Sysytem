@@ -11,7 +11,7 @@
               <span>@if(isset($about->sub_title)){{$about->sub_title}}@endif</span>
             </h1>
             <p class="lead mb-3 fs-4">@if(isset($about->disc)){{$about->disc}}@endif</p>
-            <a href="./about.html" class="main-btn d-inline-block py-2 px-4 fs-4">More About Us</a>
+            <a href="{{Route('about')}}" class="main-btn d-inline-block py-2 px-4 fs-4">More About Us</a>
           </div>
         </div>
         <div class="col-md-6">
@@ -50,64 +50,21 @@
     <div class="container">
       <h2 class="special-title">Our Services</h2>
       <div class="row">
+        @foreach($servicesGroups as $group)
         <div class="col-xl-3 col-lg-4 col-md-6 my-5">
           <div class="service-box">
             <div class="service-image">
-              <img src="./images/services/01.png" alt="service">
+              <img src="{{asset('Admin/Services/' . $group->image)}}" alt="service">
             </div>
-            <h3 class="service-title">Database</h3>
-            <p>UTP provides all Oracle database administration services including standalone, oracle
-              restart</p>
+            <h3 class="service-title">{{$group->group}}</h3>
+            <p>{{$group->disc}}</p>
             <a href="#" class="box-footer">
               <span>Read More</span>
               <i class="fa-solid fa-arrow-right-long"></i>
             </a>
           </div>
         </div>
-        <div class="col-xl-3 col-lg-4 col-md-6 my-5">
-          <div class="service-box">
-            <div class="service-image">
-              <img src="./images/services/02.png" alt="service">
-            </div>
-            <h3 class="service-title">Oracle EBS Application</h3>
-            <p>UTP provides all versions of oracle E-Business suite application services (Installing, Patching, Cloning,
-              upgrading, and Administration).</p>
-            <a href="#" class="box-footer">
-              <span>Read More</span>
-              <i class="fa-solid fa-arrow-right-long"></i>
-            </a>
-          </div>
-        </div>
-        <div class="col-xl-3 col-lg-4 col-md-6 my-5">
-          <div class="service-box">
-            <div class="service-image">
-              <img src="./images/services/03.png" alt="service">
-            </div>
-            <h3 class="service-title">MS Windows Server OS</h3>
-            <p>UTP provides Microsoft Windows Server OS administration services (administration, installation,
-              maintaining, upgrade, migration, upgrade, and troubleshooting services) for all versions.
-            </p>
-            <a href="#" class="box-footer">
-              <span>Read More</span>
-              <i class="fa-solid fa-arrow-right-long"></i>
-            </a>
-          </div>
-        </div>
-        <div class="col-xl-3 col-lg-4 col-md-6 my-5">
-          <div class="service-box">
-            <div class="service-image">
-              <img src="./images/services/04.png" alt="service">
-            </div>
-            <h3 class="service-title">Exadata Administration</h3>
-            <p>UTP provides all Exadata versions administration services for all Exadata types whether bare-metal or
-              virtualized for Eighth, quarter, half, or full Exadata RAC (administration, Issues Investigation,
-              Performance tuning, re-imaging, and patching).</p>
-            <a href="#" class="box-footer">
-              <span>Read More</span>
-              <i class="fa-solid fa-arrow-right-long"></i>
-            </a>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
   </section>
@@ -117,6 +74,7 @@
   <section class="partner py-5 position-relative">
     <div class="container">
       <h2 class="special-title">Partner</h2>
+      @foreach($partners as $partner)
       <div class="row align-items-center">
         <div class="col-md-6">
           <p class="lead lh-lg">
@@ -131,6 +89,7 @@
         </div>
       </div>
     </div>
+    @endforeach
   </section>
   <!-- End Partner -->
 
@@ -141,64 +100,21 @@
       <div class="row">
         <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
           <div class="accordion">
+            @foreach($faqs as $faq)
             <div class="accordion-item">
               <h2 class="accordion-header" id="faq_headOne">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq_one"
                         aria-expanded="false" aria-controls="faq_one">
-                  question One
+                 {{$faq->question}}
                 </button>
               </h2>
               <div id="faq_one" class="accordion-collapse collapse show" aria-labelledby="faq_headOne">
                 <div class="accordion-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore repellat dicta officiis voluptates
-                  quas et enim facilis
-                  voluptatum esse cumque amet beatae assumenda, in, consequatur eos eius, eveniet temporibus asperiores?
+                  {{$faq->answer}}
                 </div>
               </div>
             </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="faq_headTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#faq_two" aria-expanded="false" aria-controls="faq_two">
-                  question Two
-                </button>
-              </h2>
-              <div id="faq_two" class="accordion-collapse collapse" aria-labelledby="faq_headTwo">
-                <div class="accordion-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore repellat dicta officiis voluptates
-                  quas et enim facilis
-                  voluptatum esse cumque amet beatae assumenda, in, consequatur eos eius, eveniet temporibus asperiores?
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="faq_headThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#faq_three" aria-expanded="false" aria-controls="faq_three">
-                  question Three
-                </button>
-              </h2>
-              <div id="faq_three" class="accordion-collapse collapse" aria-labelledby="faq_headThree">
-                <div class="accordion-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore repellat dicta officiis voluptates
-                  quas et enim facilis
-                  voluptatum esse cumque amet beatae assumenda, in, consequatur eos eius, eveniet temporibus asperiores?
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="faq_headFour">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#faq_four" aria-expanded="true" aria-controls="faq_four">
-                  question Four
-                </button>
-              </h2>
-              <div id="faq_four" class="accordion-collapse collapse " aria-labelledby="faq_headFour">
-                <div class="accordion-body">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore repellat dicta
-                </div>
-              </div>
-            </div>
+            @endforeach
           </div>
         </div>
       </div>

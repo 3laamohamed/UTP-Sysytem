@@ -1,13 +1,17 @@
 <?php
 
 namespace App\Http\Controllers\Main;
+use App\Models\FAQ;
 use App\Models\Group;
 use App\Models\CopyRight;
 use App\Models\About;
+use App\Models\OurTeam;
+use App\Models\Partner;
 use App\Models\Project;
 use App\Models\Contact;
 use App\Models\Section;
 use App\Models\Details;
+use App\Models\ServicesGroup;
 use App\Models\Social;
 use App\Models\Client;
 use App\Models\Services;
@@ -26,7 +30,7 @@ class MainController extends Controller
         $getdevice  = VisitorController::get_device();
         $getos      = VisitorController::get_os();
         $getip      = VisitorController::get_ip();
-        $data      = VisitorController::get_user_agent();
+        $data       = VisitorController::get_user_agent();
 
         date_default_timezone_set("Africa/Cairo");
         $date = date("Y-m-d");
@@ -42,22 +46,28 @@ class MainController extends Controller
             'os'        =>$getos,
         ]);
 
-        $about    = About::get()->first();
-        $services = Services::get()->all();
-        $groups   = Group::get()->all();
-        $clients  = Client::inRandomOrder()->get()->all();
-        $copyright= CopyRight::get()->first();
-        $social   = Social::get()->first();
-        $projects = Project::orderBy("sort_project")->get();
+         $about    = About::get()->first();
+         $servicesGroups = ServicesGroup::orderBy("sort_project")->get();
+         $faqs = FAQ::get()->all();
+         $partners = Partner::get()->all();
+//        $services = Services::get()->all();
+//        $groups   = Group::get()->all();
+//        $clients  = Client::inRandomOrder()->get()->all();
+//        $copyright= CopyRight::get()->first();
+//        $social   = Social::get()->first();
+//        $projects = Project::orderBy("sort_project")->get();
         return view('main.home',compact([
             'about',
-            'services',
-            'groups',
-            'clients',
-            'copyright',
-            'social',
-            'projects',
-            'get_data',
+            'servicesGroups',
+            'faqs',
+            'partners',
+//            'services',
+//            'groups',
+//            'clients',
+//            'copyright',
+//            'social',
+//            'projects',
+              'get_data',
         ]));
     }
 
@@ -96,5 +106,14 @@ class MainController extends Controller
                 'details'=>$details
             ]);
         }
+    }
+
+    public function about(){
+      $about    = About::get()->first();
+      $team    = OurTeam::get()->all();
+      return view('main.about',compact([
+        'about',
+        'team',
+      ]));
     }
 }

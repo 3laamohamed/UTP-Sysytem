@@ -250,11 +250,13 @@ class AdminController extends Controller
     #################### Group Page ###########################
     public function save_services_group(Request $request){
       $file = new Filesystem;
+      $last_group = Project::max('sort_project') + 1;
       $file = $this->saveimage($request->image, 'Admin/Services');
       $save = ServicesGroup::create([
         'group'=>$request->name,
         'image'=>$file,
         'disc'=>$request->disc,
+        'sort_project'=>$last_group
       ]);
       if($save){return $this->ReturnSucsess('true', $save->id);}
     }
@@ -771,6 +773,7 @@ class AdminController extends Controller
       $file = $this->saveimage($request->client, 'Admin/Partners');
       $save = Partner::create([
         'image' => $file,
+        'disc'=>$request->disc,
       ]);
       if($save){return response()->json(['status'=>'true','id'=>$save->id,'image'=>$file]);}
     }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Main\MainController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 /*
@@ -116,6 +117,8 @@ Route::group(['prefix' => 'Admin' , 'namespace' => 'Admin'] ,function()
       Route::post('/update_faq', [AdminController::class,'update_faq']) ->name('admin.update_faq');
       Route::post('/delete_faq', [AdminController::class,'delete_faq']) ->name('admin.delete_faq');
 });
+
+Route::get('/About',[MainController::class,'about'])->name('about');
 
 
 

@@ -25,10 +25,10 @@
           <span></span>
         </div>
         <li class="nav-item">
-          <a class="nav-link" href="./index.html">Home</a>
+          <a class="nav-link" href="{{Route('home')}}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./about.html">About Us</a>
+          <a class="nav-link" href="{{Route('about')}}">About Us</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./services.html">Services</a>
