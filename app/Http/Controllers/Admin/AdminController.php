@@ -130,15 +130,10 @@ class AdminController extends Controller
     }
 
     public function project(){
-      $groups = Group::get()->all();
-      if(!empty($groups)){
-        $projects = Project::where('groupid',$groups[0]->id)->select(['id','title'])->get();
-      }else{
-        $projects =[];
-      }
+      $projects = Project::select(['id','title'])->get();
       $user = Auth::user();
       if($user->can('projects')){
-        return view('admin.project',compact('groups','projects'));
+        return view('admin.project',compact('projects'));
       }else{
         return abort(404,'User Not Access');
       }
@@ -178,6 +173,39 @@ class AdminController extends Controller
         return abort(404,'User Not Access');
       }
     }
+
+  public function View_sort_group_services(){
+    $user = Auth::user();
+    if($user->can('sort_group_services')){
+      $groups = ServicesGroup::select(['id','group','image'])->orderBy("sort_project")->get();
+      return view('admin.sort_group',compact('groups'));
+    }else{
+      return abort(404,'User Not Access');
+    }
+  }
+
+  public function View_sort_services(){
+    $user = Auth::user();
+    if($user->can('sort_group_services')){
+      $groups = ServicesGroup::select(['id','group','image'])->orderBy("sort_project")->get();
+      if(!empty($groups)){
+        $services = Services::where(['group_id'=>$groups[0]->id])->get();
+      }else{
+        $services = [];
+      }
+      return view('admin.sort_services',compact('groups','services'));
+    }else{
+      return abort(404,'User Not Access');
+    }
+  }
+
+  public function save_get_sort_services(Request $request){
+    $services = Services::where(['group_id'=>$request->id])->get();
+    return response()->json([
+      'status'=>'true',
+      'services'=>$services
+    ]);
+  }
 
     public function services_group(){
       $groups = ServicesGroup::get()->all();
@@ -351,8 +379,6 @@ class AdminController extends Controller
         $save_project = Project::create([
             'title'     => $request->label,
             'disc'      => $request->disc,
-            'groupid'   => $group->id,
-            'groupname' => $group->group,
             'image'     => $file,
             'sort_project'=>$last_sort
         ]);
@@ -666,6 +692,18 @@ class AdminController extends Controller
       }
       if($update_project){return $this->ReturnSucsess('true', 'Saved Sort');}
     }
+
+  ######################## save_sort_Group Services ########################
+  public function save_sort_group_services(Request $request){
+    $counter = 1;
+    foreach ($request->projects as $project){
+      $update_project = ServicesGroup::where(['id'=>$project])->update([
+        'sort_project'=>$counter
+      ]);
+      $counter++;
+    }
+    if($update_project){return $this->ReturnSucsess('true', 'Saved Sort');}
+  }
 
     public function save_control_page(Request $request){
       foreach ($request->pages as $page){

@@ -137,6 +137,7 @@
   <!-- Start Contact -->
   <section class="contact py-5 position-relative">
     <div class="container">
+      @csrf
       <h2 class="special-title">Contact</h2>
       <div class="row align-items-center">
         <div class="col-md-8 mb-3">
@@ -172,11 +173,13 @@
           </div>
         </div>
         <div class="col-md-4">
-          <a href="mailto:Sales@utpsys.com"
+          @if(!empty($social->gmail))
+          <a href="mailto:{{$social->gmail}}"
              class="d-flex align-items-center justify-content-start flex-column gap-1 mb-5">
             <i class="fa-solid fa-envelope fa-4x fa-fw"></i>
-            <span class="fs-4 text-dark">Sales@utpsys.com</span>
+            <span class="fs-4 text-dark">{{$social->gmail}}</span>
           </a>
+          @endif
           <a href="https://maps.app.goo.gl/ciDkUnNm3E6iZ7Cx8" target="_blank"
              class="d-flex align-items-center justify-content-start flex-column gap-1 mb-5">
             <i class="fa-solid fa-location-dot fa-4x fa-fw"></i>

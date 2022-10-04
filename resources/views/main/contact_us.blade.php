@@ -31,10 +31,12 @@
               @endif
             </li>
             <li class="py-2">
-              <a href="mailto:Sales@utpsys.com" class=" text-muted">
+              @if(!empty($social->gmail))
+              <a href="mailto:{{$social->gmail}}" class=" text-muted">
                 <i class="px-2 fa-solid fa-envelope text-muted"></i>
-                <span>Sales@utpsys.com</span>
+                <span>{{$social->gmail}}</span>
               </a>
+              @endif
             </li>
             <li class="py-2">
               <a href="https://maps.app.goo.gl/ciDkUnNm3E6iZ7Cx8" class="text-muted" target="_blank">
@@ -59,24 +61,25 @@
       </div>
       <div class="col-md-8">
         <div class="contact-form">
-          <form>
+          @csrf
             <h4 class="my-4 main-color fw-bold">Contact With Us</h4>
-            <p class="text-muted">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi, sunt non. Natus
-              quis, officiis illo facere deleniti unde quo laboriosam.</p>
             <div class="form-group mb-2">
-              <label for="name" class="control-label mb-1">Your Name</label>
-              <input type="text" id="name" name="name" class="form-control">
+              <label for="user_name" class="control-label mb-1">Your Name</label>
+              <input type="text" id="user_name" name="user_email" class="form-control">
             </div>
             <div class="form-group mb-2">
-              <label for="email" class="control-label mb-1">Your Email</label>
-              <input type="text" id="email" name="email" class="form-control">
+              <label for="user_email" class="control-label mb-1">Your Email</label>
+              <input type="text" id="user_email" name="user_email" class="form-control">
+            </div>
+            <div class="form-group mb-2">
+              <label for="user_phone" class="control-label mb-1">Your Phone</label>
+              <input type="text" id="user_phone" name="user_phone" class="form-control">
             </div>
             <div class="form-group mb-2">
               <label for="message" class="control-label mb-1">Your Message</label>
               <textarea id="message" name="message" class="form-control" rows="5"></textarea>
             </div>
-            <button class="main-btn py-2 px-4 rounded-2" type="submit">Send</button>
-          </form>
+            <button class="main-btn py-2 px-4 rounded-2" id="save_message" type="submit">Send</button>
         </div>
       </div>
     </div>

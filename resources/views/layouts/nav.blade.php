@@ -24,10 +24,10 @@
           <span></span>
           <span></span>
         </div>
-        <li class="nav-item">
+        <li class="nav-item @if(Route::current()->getName() == 'home') active @endif">
           <a class="nav-link" href="{{Route('home')}}">Home</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item @if(Route::current()->getName() == 'about') active @endif">
           <a class="nav-link" href="{{Route('about')}}">About Us</a>
         </li>
         <li class="nav-item">
@@ -36,7 +36,7 @@
         <li class="nav-item">
           <a class="nav-link" href="./projects.html">Projects</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item @if(Route::current()->getName() == 'contact') active @endif">
           <a class="nav-link" href="{{Route('contact')}}">Contact Us</a>
         </li>
       </ul>

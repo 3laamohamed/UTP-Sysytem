@@ -18,14 +18,6 @@
             </div>
           </div>
           <div class="col-md-6">
-            <label for="group" class="form-label">Select Group</label>
-            <select class="form-select" id='group' name="group" required>
-              @foreach($groups as $group)
-              <option value="{{$group->id}}">{{$group->group}}</option>
-              @endforeach
-            </select>
-          </div>
-          <div class="col-md-6">
             <div class="mb-3">
               <label for="description" class="form-label">description</label>
               <textarea class="form-control" name='disc' placeholder="Write Your Description" id="description" required style="min-height: 250px;height: 250px"></textarea>
