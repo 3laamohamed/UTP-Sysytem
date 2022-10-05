@@ -129,18 +129,18 @@ class MainController extends Controller
   }
 
   public function show_services($id){
-     $pages = Control_Page::get()->all();
+    $about    = About::get()->first();
+    $pages = Control_Page::get()->all();
      $group = ServicesGroup::limit(1)->where(['id'=>$id])->select(['group'])->first();
      $services = Services::where(['group_id'=>$id])->orderBy("sort_service")->get();
-     return view('main.services',compact('group','services','pages'));
+     return view('main.services',compact('group','services','pages','about'));
   }
 
   public function allServices(){
+    $about    = About::get()->first();
     $pages = Control_Page::get()->all();
-    $groups = ServicesGroup::with(['Services'=>function($query){
-      $query->orderBy('group_id')->orderBy('sort_service');
-    }])->orderBy("sort_project")->get();
-    return view('main.allservices',compact('groups','pages'));
+    $groups = ServicesGroup::with(['Services'])->orderBy("sort_project")->get();
+    return view('main.allservices',compact('groups','pages','about'));
   }
 
 

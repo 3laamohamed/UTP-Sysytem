@@ -22,6 +22,9 @@
     </div>
   </header>
   <!-- End Header -->
+  @foreach ($pages as $data)
+    @if ($data['page'] == 'about')
+      @if($data['status'] == 1)
   <!-- Start About -->
   <section class="about py-5 position-relative">
     <div class="container">
@@ -45,6 +48,12 @@
     <div class="shapes circle-shape last"></div>
   </section>
   <!-- End About -->
+      @endif
+    @endif
+  @endforeach
+  @foreach ($pages as $data)
+    @if ($data['page'] == 'services')
+      @if($data['status'] == 1)
   <!-- Start Services -->
   <section class="services py-5 position-relative">
     <div class="container">
@@ -58,8 +67,8 @@
             </div>
             <h3 class="service-title">{{$group->group}}</h3>
             <p>{{$group->disc}}</p>
-            <a href="#" class="box-footer">
-              <a href="{{URL('/Services/Group='.$group->id)}}">Read More</a>
+            <a href="{{URL('/Services/Group='.$group->id)}}" class="box-footer">
+              <span> Read More</span>
               <i class="fa-solid fa-arrow-right-long"></i>
             </a>
           </div>
@@ -69,6 +78,12 @@
     </div>
   </section>
   <!-- End Services -->
+      @endif
+    @endif
+  @endforeach
+  @foreach ($pages as $data)
+    @if ($data['page'] == 'partner')
+      @if($data['status'] == 1)
   <!-- Start Partner -->
   <section class="partner py-5 position-relative">
     <div class="container">
@@ -80,44 +95,56 @@
             {{$partner->disc}}
           </p>
         </div>
-        <div class="col-md-6">
-          <img src="{{asset('Admin/Partners/'. $partner->image)}}" alt="Partner" class="img-fluid">
+        <div class="col-md-6 text-center">
+          <img src="{{asset('Admin/Partners/'. $partner->image)}}" alt="Partner" width="80%">
         </div>
       </div>
       @endforeach
     </div>
   </section>
   <!-- End Partner -->
+      @endif
+    @endif
+  @endforeach
 
-  <!-- Start FAQ -->
-  <section class="faq py-5 position-relative">
-    <div class="container">
-      <h2 class="special-title">FAQ</h2>
-      <div class="row">
-        <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-          <div class="accordion">
-            @foreach($faqs as $faq)
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="faq_headOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q{{$faq->id}}"
-                        aria-expanded="false" aria-controls="faq_one">
-                 {{$faq->question}}
-                </button>
-              </h2>
-              <div id="q{{$faq->id}}" class="accordion-collapse collapse" aria-labelledby="faq_headOne">
-                <div class="accordion-body">
-                  {{$faq->answer}}
+  @foreach ($pages as $data)
+    @if ($data['page'] == 'FAQ')
+      @if($data['status'] == 1)
+        <!-- Start FAQ -->
+        <section class="faq py-5 position-relative">
+          <div class="container">
+            <h2 class="special-title">FAQ</h2>
+            <div class="row">
+              <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                <div class="accordion">
+                  @foreach($faqs as $faq)
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="faq_headOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q{{$faq->id}}"
+                                aria-expanded="false" aria-controls="faq_one">
+                          {{$faq->question}}
+                        </button>
+                      </h2>
+                      <div id="q{{$faq->id}}" class="accordion-collapse collapse" aria-labelledby="faq_headOne">
+                        <div class="accordion-body">
+                          {{$faq->answer}}
+                        </div>
+                      </div>
+                    </div>
+                  @endforeach
                 </div>
               </div>
             </div>
-            @endforeach
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- End FAQ -->
+        </section>
+        <!-- End FAQ -->
+      @endif
+    @endif
+  @endforeach
 
+  @foreach ($pages as $data)
+    @if ($data['page'] == 'clients')
+      @if($data['status'] == 1)
   <!-- Start Clients -->
   <section class="clients  py-5 position-relative">
     <h2 class="special-title">Our Clients</h2>
@@ -132,7 +159,13 @@
     </div>
   </section>
   <!-- End Clients -->
+      @endif
+    @endif
+  @endforeach
 
+  @foreach ($pages as $data)
+    @if ($data['page'] == 'contact')
+      @if($data['status'] == 1)
   <!-- Start Contact -->
   <section class="contact py-5 position-relative">
     <div class="container">
@@ -189,5 +222,7 @@
       </div>
     </div>
   </section>
-  <!-- End Contact -->
+      @endif
+    @endif
+  @endforeach
 @stop

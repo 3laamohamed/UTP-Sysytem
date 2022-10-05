@@ -1,6 +1,6 @@
 :root {
   --dark-color: #1a202c;
-  --main-color: 21, 157, 113;
+  --main-color: 55, 128, 182;
   --main-transition: 0.5s ease-in-out;
   --main-box-shadow: 0 4px 6px -1px rgb(0 0 0 / 60%),
     0 2px 4px -1px rgb(0 0 0/ 60%);
@@ -10,6 +10,19 @@ body {
   background: #c9d6ff;
   background: -webkit-linear-gradient(to right, #e2e2e2, #c9d6ff);
   background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+}
+::-webkit-scrollbar {
+  background: white;
+  width: 7px;
+  height: 7px;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    138deg,
+    rgba(var(--main-color), 1),
+    #283e7f);
+  border-radius: 3px;
 }
 a {
   text-decoration: none;
@@ -162,7 +175,7 @@ aside li.active a::before {
 }
 /* End Wrapper Design */
 .navbar {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 1);
 }
 .navbar-nav .dropdown-menu {
   background: rgba(255, 255, 255, 0.6);

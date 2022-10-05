@@ -5,9 +5,10 @@
     <form class="d-flex align-items-center justify-content-center view-form" id="save_form" action=" " method="POST" multiple enctype="multipart/form-data">
       <div class="form-check form-switch" style="font-size:25px">
         @csrf
+        <div class="row">
         @foreach($pages as $page)
           @php if($page->status == 1){$check="checked";} @endphp
-          <div>
+          <div class="col-md-4">
             <input class="form-check-input" name="{{$page->page}}" type="checkbox" id="page-{{$page->page}}" vlaue='{{$page->status}}' {{$check}}>
             <label class="form-check-label" for="page-{{$page->page}}">
               <span style="font-size:25px">{{$page->page}}</span>
@@ -15,10 +16,11 @@
           </div>
           @php $check = "" @endphp
         @endforeach
+        </div>
       </div>
     </form>
-    <div class="d-grid gap-2 col-6 mx-auto">
-      <button class="btn btn-success clicked" id="save_control_page" type="button">Save</button>
+    <div class="col-6 mx-auto my-3">
+      <button class="btn btn-success w-100 clicked" id="save_control_page" type="button">Save</button>
     </div>
   </div>
 

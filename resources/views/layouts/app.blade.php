@@ -46,9 +46,7 @@
       @if(Auth::user())
         <nav class="navbar navbar-light sticky-top shadow-sm px-3">
             <div class="navbar-brand">
-                <a href="{{ url('/') }}" class="text-white">
                     <img src="{{ asset('Admin/images/logo.png') }}" alt="Logo" width="100px" height="90px">
-                </a>
                 <button class="toggle-menu me-2">
                     <i class="fa-solid fa-bars-staggered fa-xl"></i>
                 </button>

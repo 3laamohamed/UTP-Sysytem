@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             'status_v'=>0,
             'status_p'=>0
         ]);
-        $pages = array('about','project','contact','clients','copyright','social','services','team');
+        $pages = array('partner','project','contact','clients','about','services');
         foreach ($pages as $page){
           $control_page = Control_Page::create([
             'page'   =>$page,

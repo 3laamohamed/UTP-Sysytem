@@ -27,6 +27,9 @@ ul {
 }
 body {
   font-family: 'Cairo', sans-serif;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 ::-webkit-scrollbar {
   background: white;
@@ -580,6 +583,12 @@ header img {
   color: var(--main-color);
 }
 /* End Contact Section */
+/* Start Footer Section */
+footer {
+  margin-top: auto;
+}
+
+/* End Footer Section */
 /*
 	==============================
 	==  Start Home Page Design  ==

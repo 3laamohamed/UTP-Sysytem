@@ -5,39 +5,6 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-  <form class="d-flex align-items-center justify-content-center view-form" id="save_form" action=" " method="POST" multiple enctype="multipart/form-data">
-    <div class="form-check form-switch" style="font-size:25px">
-      @csrf
-      @if(isset($data->status_v))
-        @if($data->status_v == 0)
-        <input class="form-check-input" name="visitors" type="checkbox" id="visitors" vlaue='0'>
-        @else
-        <input class="form-check-input" name="visitors" type="checkbox" id="visitors"  vlaue='1' checked>
-        @endif
-        <label class="form-check-label" for="visitors">
-          <span style="font-size:25px">Counter Visitors</span>
-          <span style="color:#ffa500;font-size:25px"> | {{$data->visitors}}</span>
-        </label>
-      @endif
-    </div>
-    <div class="form-check form-switch" style="font-size:25px">
-      @if(isset($data->status_p))
-        @if($data->status_p == 0)
-        <input class="form-check-input" name="project" type="checkbox" id="project">
-        @else
-        <input class="form-check-input" name="project" type="checkbox" id="project" checked>
-        @endif
-        <label class="form-check-label" for="project">
-          <span style="font-size:25px">Counter Projects</span>
-          <span style="color:#ffa500;font-size:25px"> | {{$data->projects}}</span>
-        </label>
-      @endif
-    </div>
-  </form>
-  <div class="d-grid gap-2 col-6 mx-auto my-3">
-    <button class="btn btn-success" type="button" id="save_data">Save</button>
-  </div>
-  <hr>
   <div class="buttons-filter">
     <button class='btn btn-light filter-btn' data-value='today'>today</button>
     <button class='btn btn-light filter-btn' data-value='yesterday'>yesterday</button>

@@ -11,6 +11,6 @@ class ServicesGroup extends Model
     protected $table ='services_groups';
     protected $guarded = [];
     public function Services(){
-      return $this->hasMany('App\Models\Services','group_id','id');
+      return $this->hasMany('App\Models\Services','group_id','id')->orderBy('sort_service');
     }
 }

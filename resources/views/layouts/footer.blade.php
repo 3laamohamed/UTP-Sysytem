@@ -24,14 +24,28 @@
         message: d
       },
       success: function(a) {
-        "true" == a.status && (Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Saved Message",
-          showConfirmButton: !1,
-          timer: 1500
-        }), $("#user_name").val(""), $("#user_email").val(""), $("#user_phone").val(
-          ""), $("#message").val(""))
+        if(a.status == "true")
+        {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Saved Message",
+            showConfirmButton: !1,
+            timer: 1500
+          })
+          $("#user_name").val(""), $("#user_email").val(""), $("#user_phone").val(
+            ""), $("#message").val("")
+        }
+
+        else if(a.status == "false"){
+          Swal.fire({
+            title: 'Error!',
+            text: a.msg,
+            icon: 'error',
+            confirmButtonText: 'Done'
+          })
+        }
+
       }
     })
   });

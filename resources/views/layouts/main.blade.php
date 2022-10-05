@@ -33,6 +33,8 @@
       <script src="{{asset('global/js/owl.carousel.min.js')}}"></script>
       <!-- isotope v3.0.6 -->
       <script src="{{asset('global/js/isotope.pkgd.min.js')}}"></script>
+      <script src="{{ asset('global/js/sweetalert2@10.js') }}"></script>
+
     </head>
     <body>
       @include('layouts.nav')

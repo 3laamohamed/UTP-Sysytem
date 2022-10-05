@@ -157,7 +157,7 @@ class AdminController extends Controller
     public function services(){
       $groups = ServicesGroup::get()->all();
       if(!empty($groups)){
-        $services = Services::where(['group_id'=>$groups[0]->id])->orderBy('id', 'DESC')->get()->all();
+        $services = Services::where(['group_id'=>$groups[0]->id])->orderBy('sort_service')->get()->all();
       }else{
         $services = [];
       }
@@ -193,7 +193,7 @@ class AdminController extends Controller
     if($user->can('sort_group_services')){
       $groups = ServicesGroup::select(['id','group','image'])->orderBy("sort_project")->get();
       if(!empty($groups)){
-        $services = Services::where(['group_id'=>$groups[0]->id])->get();
+        $services = Services::where(['group_id'=>$groups[0]->id])->orderBy("sort_service")->get();
       }else{
         $services = [];
       }
