@@ -14,7 +14,7 @@ class CreateCounterVisitorsTable extends Migration
     public function up()
     {
         Schema::create('counter_visitors', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('date')->nullable();
             $table->string('mac')->nullable();
             $table->string('device')->nullable();

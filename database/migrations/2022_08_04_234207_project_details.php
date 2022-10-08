@@ -15,8 +15,8 @@ class ProjectDetails extends Migration
     {
         Schema::create('details_project', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('image')->default(' ');
-            $table->integer('section_id')->default('0');
+            $table->string('image')->nullable();
+            $table->integer('section_id')->nullable();
             $table->timestamps();
         });
     }

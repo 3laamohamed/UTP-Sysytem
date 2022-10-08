@@ -101,6 +101,7 @@ Route::group(['prefix' => 'Admin' , 'namespace' => 'Admin'] ,function()
       Route::post('/save_services_group', [AdminController::class,'save_services_group']) ->name('admin.save_services_group');
       Route::post('/get_update_services_group',[AdminController::class,'get_update_services_group'])->name('admin.get_update_services_group');
       Route::post('/update_services_group',[AdminController::class,'update_services_group'])->name('admin.update_services_group');
+      Route::post('/delete_services_group',[AdminController::class,'delete_services_group'])->name('admin.delete_services_group');
 
 
     Route::get('/View_our_team'      , [AdminController::class, 'view_our_team'])   ->name('admin.View_our_team');

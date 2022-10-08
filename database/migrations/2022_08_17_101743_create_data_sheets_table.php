@@ -15,10 +15,10 @@ class CreateDataSheetsTable extends Migration
     {
         Schema::create('data_sheets', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('visitors')->default('0');
-            $table->integer('projects')->default('0');
-            $table->integer('status_v')->default('0');
-            $table->integer('status_p')->default('0');
+            $table->integer('visitors')->nullable()->default('0');
+            $table->integer('projects')->nullable()->default('0');
+            $table->integer('status_v')->nullable()->default('0');
+            $table->integer('status_p')->nullable()->default('0');
             $table->timestamps();
         });
     }

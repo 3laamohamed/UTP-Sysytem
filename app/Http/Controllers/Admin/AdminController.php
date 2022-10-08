@@ -868,4 +868,15 @@ class AdminController extends Controller
     if($saveFaq){return $this->ReturnSucsess('true', 'Delete Question');}
   }
 
+  public function delete_services_group(Request $request){
+      $getallservices = Services::where(['group_id'=>$request->group])->get();
+      foreach ($getallservices as $ser){
+        $image_path = 'Admin/Services/'. $ser->image;
+        File::delete($image_path);
+        $delclient = Services::where(['id'=>$ser->id])->delete();
+      }
+      $del_group = ServicesGroup::where(['id'=>$request->group])->delete();
+    if($del_group){return $this->ReturnSucsess('true', 'Deleted Group');}
+  }
+
 }

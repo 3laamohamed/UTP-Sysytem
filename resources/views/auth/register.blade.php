@@ -1,3 +1,4 @@
+@if(isset($user_update))
 @php
     $title = 'Register'; $chnge_req = 'required';
 @endphp
@@ -122,3 +123,4 @@
   });
 </script>
 @endsection
+@endif

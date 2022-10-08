@@ -134,12 +134,12 @@ $title = 'Project';
                 confirmButtonText: "Yes, dlete it!"
             }).then(b => {
                 b.isConfirmed && $.ajax({
-                    url: "{{ route('admin.del.project') }}",
+                    url: "{{ route('admin.delete_services_group') }}",
                     method: "post",
                     enctype: "multipart/form-data",
                     data: {
                         _token,
-                        project: a
+                        group: a
                     },
                     success: function(b) {
                         (b.status = "true") && ($(`tr#${a}`).remove(), Swal.fire({

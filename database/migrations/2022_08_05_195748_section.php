@@ -15,8 +15,8 @@ class Section extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->default(' ');
-            $table->integer('project_id')->default('0');
+            $table->string('name')->nullable();
+            $table->integer('project_id')->nullable();
             $table->timestamps();
         });
     }
