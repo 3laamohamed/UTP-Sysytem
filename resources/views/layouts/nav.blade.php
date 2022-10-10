@@ -20,7 +20,7 @@ function searchPage($pagesArray,$page)
 @endphp
 <!-- Start Partner Fixed -->
 <!-- Start Navbar -->
-<nav class="navbar navbar-expand-md">
+<nav class="navbar navbar-expand-lg">
   <div class="container">
     <a class="navbar-brand" href="#">
       @if(isset($about->logo))
@@ -35,32 +35,47 @@ function searchPage($pagesArray,$page)
     </button>
     <div class="navbar-collapse">
       <ul class="navbar-nav mb-2 mb-lg-0">
-        <div class="close-nav d-block d-md-none" id="close-nav">
+        <div class="close-nav d-block d-lg-none" id="close-nav">
           <span></span>
           <span></span>
         </div>
 
-        <li class="nav-item @if(Route::current()->getName() == 'home') active @endif">
-          <a class="nav-link" href="{{Route('home')}}">Home</a>
+        <li class="nav-item">
+          <a class="nav-link @if(Route::current()->getName() == 'home') active @endif" href="{{Route('home')}}"  data-scroll="home">Home</a>
         </li>
         @if(searchPage($pages,'about') == true)
-        <li class="nav-item @if(Route::current()->getName() == 'about') active @endif">
-          <a class="nav-link" href="{{Route('about')}}">About Us</a>
+        <li class="nav-item">
+          <a class="nav-link @if(Route::current()->getName() == 'about') active @endif" href="{{Route('about')}}">About Us</a>
         </li>
         @endif
         @if(searchPage($pages,'services') == true)
-        <li class="nav-item @if(Route::current()->getName() == 'allServices')active @endif">
-          <a class="nav-link" href="{{Route('allServices')}}">Services</a>
+        <li class="nav-item">
+          <a class="nav-link @if(Route::current()->getName() == 'allServices')active @endif" href="{{Route('allServices')}}">Services</a>
+        </li>
+        @endif
+        @if(searchPage($pages,'partner') == true)
+        <li class="nav-item">
+          <a class="nav-link" href="./#partner" data-scroll="partner">Partner</a>
+        </li>
+        @endif
+        @if(searchPage($pages,'FAQ') == true)
+        <li class="nav-item">
+          <a class="nav-link" href="./#faq" data-scroll="faq">FAQ</a>
+        </li>
+        @endif
+        @if(searchPage($pages,'clients') == true)
+        <li class="nav-item">
+          <a class="nav-link" href="./#clients" data-scroll="clients">Clients</a>
         </li>
         @endif
         @if(searchPage($pages,'project') == true)
-        <li class="nav-item @if(Route::current()->getName() == 'projects') active @endif">
-          <a class="nav-link" href="{{Route('projects')}}">Projects</a>
+        <li class="nav-item">
+          <a class="nav-link @if(Route::current()->getName() == 'projects') active @endif" href="{{Route('projects')}}">Projects</a>
         </li>
         @endif
         @if(searchPage($pages,'contact') == true)
-        <li class="nav-item @if(Route::current()->getName() == 'contact') active @endif">
-          <a class="nav-link" href="{{Route('contact')}}">Contact Us</a>
+        <li class="nav-item">
+          <a class="nav-link @if(Route::current()->getName() == 'contact') active @endif" href="{{Route('contact')}}">Contact Us</a>
         </li>
         @endif
       </ul>

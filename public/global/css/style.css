@@ -169,7 +169,7 @@ body {
   position: fixed;
   bottom: 50px;
   right: 50px;
-  width: 200px;
+  width: 100px;
   z-index: 9;
   transition: all 0.5s ease-in-out;
   -webkit-transition: all 0.5s ease-in-out;
@@ -237,7 +237,7 @@ nav.navbar.nav-fixed .nav-link:hover,
 nav.navbar.nav-fixed .nav-link.active {
   color: var(--main-color);
 }
-@media (max-width: 767.98px) {
+@media (max-width: 991.98px) {
   .navbar-collapse {
     width: 100vw;
     height: 100vh;
@@ -387,19 +387,14 @@ header img {
   animation-duration: 1.5s;
 }
 .about .triangle-shape {
-  bottom: 35%;
-  left: 35%;
+  bottom: 55%;
+  left: 70%;
   animation-duration: 1s;
 }
 .about .dots-shape {
   top: 10%;
   left: 20%;
   animation-duration: 3s;
-}
-.about .circle-shape.last {
-  bottom: 20%;
-  right: 10%;
-  animation-duration: 2.5s;
 }
 @media (max-width: 767.98px) {
   .about p {
@@ -489,6 +484,10 @@ header img {
 /* Start Partner Section */
 .partner p {
   text-align: justify;
+}
+.partner-image {
+  width: 300px;
+  max-width: 100%;
 }
 /* End Partner Section */
 /* Start FAQ Section */

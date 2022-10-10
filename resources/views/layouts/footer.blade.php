@@ -1,6 +1,6 @@
 <!-- Start Footer -->
 <footer class="py-3 text-center bg-dark">
-  <p class="m-0 text-white">Copyright © 2020 UTP SYSTEMS</p>
+  <p class="m-0 text-white">@if(!empty($copy->name)){{$copy->name}}@endif</p>
 </footer>
 <!-- End Footer -->
 <script>
@@ -29,7 +29,7 @@
           Swal.fire({
             position: "center",
             icon: "success",
-            title: "Saved Message",
+            title: "Message Send",
             showConfirmButton: !1,
             timer: 1500
           })

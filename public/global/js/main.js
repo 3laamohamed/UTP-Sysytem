@@ -20,6 +20,31 @@ $(document).ready(function () {
 	});
 	getScroll();
 
+  $(".navbar-nav .nav-link").on("click", function () {
+    $(this)
+      .addClass("active")
+      .parent()
+      .siblings()
+      .find(".nav-link")
+      .removeClass("active"),
+      $("#close-nav").click();
+  });
+  $(window).on("scroll", function () {
+    getScroll();
+    $(".check-scroll").each(function () {
+      if ($(window).scrollTop() >= $(this).offset().top - 150) {
+        let a = $(this).attr("id");
+        $(`.navbar-nav .nav-link[data-scroll="${a}"]`)
+          .addClass("active")
+          .parent()
+          .siblings()
+          .find(".nav-link")
+          .removeClass("active");
+      }
+    });
+  });
+
+
 	// Open And Close Navbar In Mobile
 	const navbarMobile = $('.navbar-collapse');
 	$('#open-nav').on('click', function () {

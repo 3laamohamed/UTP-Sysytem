@@ -10,17 +10,23 @@
         <form id="form_save_client" action=" " method="POST" multiple enctype="multipart/form-data"class="mb-3">
           @csrf
           <!-- Upload Image -->
-          <div class='text-center'>
-            <i class="file-image">
-              <input autocomplete="off" id="client" name="client" type="file" onchange="readImage(this)" title="" required />
-              <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
-              <div id='item-image'>
-                <label for="client" class="image" data-label="Add Image"></label>
+          <div class="row">
+            <div class="col-md-6">
+              <div class='text-center'>
+                <i class="file-image">
+                  <input autocomplete="off" id="client" name="client" type="file" onchange="readImage(this)" title="" required />
+                  <i class="reset" onclick="resetImage(this.previousElementSibling)"></i>
+                  <div id='item-image'>
+                    <label for="client" class="image" data-label="Add Image"></label>
+                  </div>
+                </i>
               </div>
-            </i>
-          </div>
-          <div class='text-center'>
-          <textarea name="disc" class="form-control mt-3" placeholder="Write Description" id="disc" style="height: 200px"></textarea>
+            </div>
+            <div class="col-md-6">
+              <div class='text-center'>
+                <textarea name="disc" class="form-control mt-3" placeholder="Write Description" id="disc" style="height: 200px"></textarea>
+              </div>
+            </div>
           </div>
         </form>
         <div class="d-grid gap-2 col-6 mx-auto">

@@ -17,6 +17,7 @@
             <button class="btn btn-success clicked" id="save_faq" type="button">Save</button>
           </div>
         </div>
+        <div class="col-12">
         <table class="table mt-4 text-center shadow-lg">
           <thead class="table-dark">
           <tr>
@@ -44,6 +45,7 @@
           @endforeach
           </tbody>
         </table>
+        </div>
       </div>
 </div>
 <script>

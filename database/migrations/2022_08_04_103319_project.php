@@ -15,11 +15,11 @@ class Project extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title')->default(' ');
-            $table->text('disc')->default(' ');
-            $table->text('image')->default(' ');
-            $table->text('groupid')->default(' ');
-            $table->text('groupname')->default(' ');
+            $table->string('title')->nullable();
+            $table->text('disc')->nullable();
+            $table->text('image')->nullable();
+            $table->text('groupid')->nullable();
+            $table->text('groupname')->nullable();
             $table->text('sort_project')->nullable();
             $table->timestamps();
         });

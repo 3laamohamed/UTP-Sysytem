@@ -406,7 +406,7 @@ tr {
   position: sticky;
   top: 0;
 }
-.table > :not(caption) > * > * {
+.view-table .table > :not(caption) > * > * {
   white-space: nowrap;
 }
 .sort-projects ul {

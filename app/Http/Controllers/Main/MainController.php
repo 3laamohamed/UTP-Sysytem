@@ -54,6 +54,7 @@ class MainController extends Controller
          $clients  = Client::inRandomOrder()->get()->all();
          $social   = Social::get()->first();
          $pages = Control_Page::get()->all();
+         $copy = CopyRight::select(['name'])->get()->first();
 
       return view('main.home',compact([
             'about',
@@ -63,7 +64,8 @@ class MainController extends Controller
             'clients',
             'social',
             'get_data',
-            'pages'
+            'pages',
+            'copy'
         ]));
     }
 
@@ -73,7 +75,7 @@ class MainController extends Controller
     function checkEmail($email) {
       $find1 = strpos($email, '@');
       $find2 = strpos($email, '.');
-      return ($find1 !== false && $find2 !== false && $find2 > $find1);
+      return ($find1 !== false && $find2 !== false);
     }
     if(checkEmail($request->email)){$flage=0;}else{$flage=1;$msg="incorrect Email";return response()->json(['status'=>'false','msg'=>$msg]);}
     $size_phone = strlen($request->phone);
@@ -96,10 +98,12 @@ class MainController extends Controller
       $pages = Control_Page::get()->all();
       $about    = About::get()->first();
       $team    = OurTeam::get()->all();
+      $copy = CopyRight::select(['name'])->get()->first();
       return view('main.about',compact([
         'about',
         'team',
-        'pages'
+        'pages',
+        'copy'
       ]));
     }
 
@@ -108,12 +112,14 @@ class MainController extends Controller
     $about    = About::get()->first();
     $team     = OurTeam::get()->all();
     $social   = Social::get()->first();
+    $copy = CopyRight::select(['name'])->get()->first();
 
     return view('main.contact_us',compact([
       'about',
       'team',
       'social',
-      'pages'
+      'pages',
+      'copy'
     ]));
   }
 
@@ -121,10 +127,13 @@ class MainController extends Controller
     $pages = Control_Page::get()->all();
     $about    = About::get()->first();
     $projects = Project::orderBy("sort_project")->get();
+    $copy = CopyRight::select(['name'])->get()->first();
+
     return view('main.project',compact([
       'about',
       'projects',
-      'pages'
+      'pages',
+      'copy'
     ]));
   }
 
@@ -133,14 +142,16 @@ class MainController extends Controller
     $pages = Control_Page::get()->all();
      $group = ServicesGroup::limit(1)->where(['id'=>$id])->select(['group'])->first();
      $services = Services::where(['group_id'=>$id])->orderBy("sort_service")->get();
-     return view('main.services',compact('group','services','pages','about'));
+     $copy = CopyRight::select(['name'])->get()->first();
+     return view('main.services',compact('group','services','pages','about','copy'));
   }
 
   public function allServices(){
     $about    = About::get()->first();
     $pages = Control_Page::get()->all();
+    $copy = CopyRight::select(['name'])->get()->first();
     $groups = ServicesGroup::with(['Services'])->orderBy("sort_project")->get();
-    return view('main.allservices',compact('groups','pages','about'));
+    return view('main.allservices',compact('groups','pages','about','copy'));
   }
 
 

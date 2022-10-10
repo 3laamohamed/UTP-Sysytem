@@ -2,7 +2,7 @@
 @section('content')
 
   <!-- Start Header -->
-  <header class="check-scroll" id='Home'>
+  <header class="check-scroll" id='home'>
     <div class="container">
       <div class="row justify-content-center align-items-center">
         <div class="col-md-6">
@@ -30,8 +30,11 @@
     <div class="container">
       <h2 class="special-title">About</h2>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 position-relative">
           <img src="{{asset('global/images/about.png')}}" alt="About" class="img-fluid">
+          <div class="shapes circle-shape first"></div>
+          <div class="shapes dots-shape"></div>
+          <div class="shapes triangle-shape"></div>
         </div>
         <div class="col-md-6">
           <p class="lead">
@@ -42,10 +45,7 @@
         </div>
       </div>
     </div>
-    <div class="shapes circle-shape first"></div>
-    <div class="shapes dots-shape"></div>
-    <div class="shapes triangle-shape"></div>
-    <div class="shapes circle-shape last"></div>
+
   </section>
   <!-- End About -->
       @endif
@@ -85,18 +85,20 @@
     @if ($data['page'] == 'partner')
       @if($data['status'] == 1)
   <!-- Start Partner -->
-  <section class="partner py-5 position-relative">
+  <section class="partner py-5 position-relative check-scroll" id="partner">
     <div class="container">
       <h2 class="special-title">Partner</h2>
       @foreach($partners as $partner)
       <div class="row align-items-center">
+        @if(!empty($partner->disc))
         <div class="col-md-6">
           <p class="lead lh-lg">
             {{$partner->disc}}
           </p>
         </div>
-        <div class="col-md-6 text-center">
-          <img src="{{asset('Admin/Partners/'. $partner->image)}}" alt="Partner" width="80%">
+        @endif
+        <div class="col-md-6 text-center mx-auto">
+          <img src="{{asset('Admin/Partners/'. $partner->image)}}" alt="Partner" class="partner-image">
         </div>
       </div>
       @endforeach
@@ -111,7 +113,7 @@
     @if ($data['page'] == 'FAQ')
       @if($data['status'] == 1)
         <!-- Start FAQ -->
-        <section class="faq py-5 position-relative">
+        <section class="faq py-5 position-relative check-scroll" id="faq">
           <div class="container">
             <h2 class="special-title">FAQ</h2>
             <div class="row">
@@ -146,7 +148,7 @@
     @if ($data['page'] == 'clients')
       @if($data['status'] == 1)
   <!-- Start Clients -->
-  <section class="clients  py-5 position-relative">
+  <section class="clients  py-5 position-relative check-scroll" id="clients">
     <h2 class="special-title">Our Clients</h2>
     <div class="container">
       <div class="owl-carousel clients-carousel">
